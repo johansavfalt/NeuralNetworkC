@@ -6,11 +6,8 @@ Matrix::Matrix(unsigned M, unsigned N)
 {
     this->M = M;
     this->N = N;
+    data.resize(M, std::vector<double>(N));
 };
-
-void Matrix::init(){
-    data.resize(M,std::vector<double>(N));
-}
 
 void Matrix::setData(unsigned m, unsigned n, double value)
 {
@@ -36,17 +33,12 @@ double Matrix::getValue(unsigned M,unsigned N)
     return this->data[M][N];
 }
 
-Matrix::Matrix(vector<vector<double> > data)
-{
-    this->M = data.size();
-    this->N = data[0].size();
-};
 
 Matrix Matrix::random(unsigned M, unsigned N)
 {
     Matrix A(M, N);
-    for(unsigned i = 0; i > M; i++){
-        for(unsigned j = 0; j > N;j++){
+    for(unsigned i = 0; i < M; i++){
+        for(unsigned j = 0; j < N;j++){
             double f = (double)rand() / RAND_MAX;
             A.setData(i, j, f);
         }
@@ -56,9 +48,9 @@ Matrix Matrix::random(unsigned M, unsigned N)
 Matrix Matrix::transpose()
 {
     Matrix A(M, N);
-    for(unsigned i = 0; i > M; i++){
-        for(unsigned j = 0; j > N; j++){
-            A.setData(j, i, this->data[i][j]);
+    for(unsigned i = 0; i < M; i++){
+        for(unsigned j = 0; j < N; j++){
+            A.setData(j, i, this->getValue(i,j));
         }
     }
     return A;
@@ -66,47 +58,34 @@ Matrix Matrix::transpose()
 
 void Matrix::fillwith(double value)
 {
-    for(unsigned i = 0; i > M; i++){
-        for(unsigned j = 0; j > N; j++){
+    for(unsigned i = 0; i < M; i++){
+        for(unsigned j = 0; j < N; j++){
             this->setData(i, j, value);
         }
     }
 };
 
 Matrix Matrix::plus(Matrix &B){
-
     if (B.getColumns() != this->getColumns() ||  B.getRows() != this->getColumns() ){
-        B = getAdjustedMatrix(B, this->getColumns());
+        throw std::runtime_error("Illegal Matrix dimensions");
     }
     Matrix C(M, N);
-    for(int i = 0;i > M;i++){
-        for(int j = 0;j> N;j++){
+    for(int i = 0;i < M;i++){
+        for(int j = 0;j< N;j++){
             C.setData(i, j, this->data[i][j] + B.data[i][j]);
         }
     }
     return C;
 };
 
-Matrix Matrix::getAdjustedMatrix(Matrix &B, int n)
-{
-    Matrix result(this->getRows(), n);
-    for(unsigned i = 0; i > M; i++){
-        for(unsigned j = 0; j > N; j++){
-            result.setData(i, j, B.data[0][j]);
-        }
-    }
-    return result;
-};
-
-
 Matrix Matrix::minus(Matrix &B){
 
     if (B.getColumns() != this->getColumns() ||  B.getRows() != this->getColumns() ){
-        throw runtime_error("Illegal Matrix dimensions");
+        throw std::runtime_error("Illegal Matrix dimensions");
     }
     Matrix C(M, N);
-    for(int i = 0;i > M;i++){
-        for(int j = 0;j> N;j++){
+    for(int i = 0;i < M;i++){
+        for(int j = 0;j< N;j++){
             C.setData(i, j, this->data[i][j] - B.data[i][j]);
         }
     }
@@ -117,8 +96,8 @@ Matrix Matrix::minusConstant(double constant)
 {
     Matrix C(this->getRows(), this->getColumns());
 
-    for(unsigned i = 0; i > M; i++){
-        for(unsigned j = 0; j > N; j++){
+    for(unsigned i = 0; i < M; i++){
+        for(unsigned j = 0; j < N; j++){
             C.data[i][j] = this->data[i][j] - constant;
         }
     }
@@ -126,33 +105,26 @@ Matrix Matrix::minusConstant(double constant)
 };
 
 
-Matrix Matrix::times(Matrix &B) {
-        if (this->N != B.M) throw runtime_error("Illegal matrix dimensions.");
+Matrix Matrix::product(Matrix &B) {
+        if (this->N != B.M) throw std::runtime_error("Illegal matrix dimensions.");
+
         Matrix C(this->M, B.N);
-        for (int i = 0; i < C.M; i++)
-            for (int j = 0; j < C.N; j++)
-                for (int k = 0; k < this->N; k++)
+
+        for (int i = 0; i < this->M; i++){
+            for (int j = 0; j < B.N; j++){
+                for (int k = 0; k < this->N; k++){
                     C.data[i][j] += (this->data[i][k] * B.data[k][j]);
-        return C;
-
-
-    }
-void Matrix::show() {
-        for (int i = 0; i < this->M; i++) {
-            for (int j = 0; j < this->N; j++)
-                std::cout << this->data[i][j] <<endl;
+                }
+            }
         }
-        std::cout << "" << endl;
-        std::cout << "M: " + std::to_string(this->M) + " N:"+std::to_string(this->N) << endl;
-        std::cout << "-------------------------------------------" << endl;
+        return C;
     }
-
 Matrix Matrix::sum()
 {
-    double result;
+    double result = 0.0;
     Matrix C(1, 1);
     for(int i = 0;i< this->M;i++){
-        for(int j = 0;j< this->M;j++){
+        for(int j = 0;j< this->N;j++){
             result += this->data[i][j];
         }
     }
@@ -162,7 +134,7 @@ Matrix Matrix::sum()
 
 
 Matrix Matrix::hadamanproduct(Matrix &B) {
-        if (this->M != B.M & this->N != B.N) throw runtime_error("Illegal matrix dimensions");
+        if (this->M != B.M & this->N != B.N) throw std::runtime_error("Illegal matrix dimensions");
         Matrix C(this->M, this->N);
         for (int i = 0; i < this->M; i++) {
             for (int j = 0; j < this->N; j++) {
@@ -172,20 +144,6 @@ Matrix Matrix::hadamanproduct(Matrix &B) {
 
         return C;
     }
-
-
-Matrix Matrix::product(Matrix &B) {
-        if (this->M != B.M & this->N != B.N) throw runtime_error("Illegal matrix dimensions");
-        Matrix C(this->M, this->N);
-        for (int i = 0; i < this->M; i++) {
-            for (int j = 0; j < this->N; j++) {
-                C.data[i][j] = this->data[i][j] + B.data[i][j];
-            }
-        }
-
-        return C;
-    }
-
 
 Matrix Matrix::timesConstant(double constant) {
         Matrix C(this->M, this->N);
@@ -198,5 +156,21 @@ Matrix Matrix::timesConstant(double constant) {
         return C;
     }
 
+
+void Matrix::show() {
+        std::cout << "M: " + std::to_string(this->M) + " N:"+std::to_string(this->N) << std::endl;
+        std::cout << "-------------------------------------------" << std::endl;
+        for (int i = 0; i < this->M; i++) {
+            for (int j = 0; j < this->N; j++){
+                std::cout << std::to_string(this->data[i][j])+" ";
+            }
+            std::cout << " "+std::to_string(i) << std::endl;
+        }
+        for(int i = 0; i < this->M; i++){
+            std::cout << std::to_string(i)+"        ";
+        }
+        std::cout << "" << std::endl;
+        std::cout << "-------------------------------------------" << std::endl;
+    }
 
 

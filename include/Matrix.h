@@ -1,7 +1,6 @@
-#pragma once
 #include <vector>
 
-using namespace std;
+using std::vector;
 
 class Matrix
 {
@@ -13,7 +12,6 @@ class Matrix
         vector<vector<double>> data;
 
         Matrix(unsigned, unsigned);
-        Matrix(vector<vector<double> > data);
         static Matrix random(unsigned, unsigned);
 
         int getColumns();
@@ -25,7 +23,6 @@ class Matrix
         void fillwith(int);
         void fillwith(double);
         void show();
-        void init();
         Matrix transpose();
         Matrix plus(Matrix &);
         Matrix minus(Matrix &);

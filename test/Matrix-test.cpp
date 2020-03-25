@@ -121,4 +121,42 @@ TEST(MatrixTest, sum){
     Matrix sum = testMatrix.sum();
     EXPECT_EQ(sum.getValue(0, 0), 4);
 }
+TEST(MatrixTest, hadamanproduct){
+    Matrix testMatrix_1(2, 2);
+    Matrix testMatrix_2(2, 2);
+
+    testMatrix_1.setData(0, 0, 1.0);
+    testMatrix_1.setData(0, 1, 2.0);
+    testMatrix_1.setData(1, 0, 3.0);
+    testMatrix_1.setData(1, 1, 4.0);
+
+
+    testMatrix_2.setData(0, 0, 5.0);
+    testMatrix_2.setData(0, 1, 6.0);
+    testMatrix_2.setData(1, 0, 7.0);
+    testMatrix_2.setData(1, 1, 8.0);
+
+    Matrix result = testMatrix_1.hadamanproduct(testMatrix_2);
+    EXPECT_EQ(result.getValue(0, 0),5.0);
+    EXPECT_EQ(result.getValue(0, 1),12.0);
+    EXPECT_EQ(result.getValue(1, 0),21.0);
+    EXPECT_EQ(result.getValue(1, 1),32.0);
+
+}
+TEST(MatrixTest, timesConstant){
+    Matrix test_matrix(2, 2);
+    test_matrix.fillwith(2.0);
+
+    Matrix timesTest = test_matrix.timesConstant(5.0);
+
+    //EXPECT_EQ(timesTest.getValue(0, 0), val2)
+
+    for(unsigned i = 0; i < 2; i++){
+        for(unsigned j = 0; j < 2; j++){
+            EXPECT_EQ(timesTest.getValue(i, j),10.0);
+        }
+    }
+}
+    
+ 
 // TODO : add more test

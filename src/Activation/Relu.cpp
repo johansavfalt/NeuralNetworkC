@@ -10,8 +10,6 @@
 Matrix Relu::activation(Matrix &Z_Matrix) 
 {
    return applyforAllElements(Z_Matrix, Relu::activate);
-
-
 }
 
 Matrix Relu::activation_derivative(Matrix &Z_Matrix) 

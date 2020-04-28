@@ -1,6 +1,7 @@
-#include <vector>
+#ifndef NeuralNetworkC_Matrix_H
+#define NeuralNetworkC_Matrix_H
 
-using std::vector;
+#include <vector>
 
 class Matrix
 {
@@ -9,7 +10,7 @@ class Matrix
         unsigned N;
 
     public:
-        vector<vector<double>> data;
+        std::vector<std::vector<double>> data;
 
         Matrix(unsigned, unsigned);
         static Matrix random(unsigned, unsigned);
@@ -17,7 +18,7 @@ class Matrix
         int getColumns();
         int getRows();
         double getValue(unsigned, unsigned );
-        vector<vector<double> > getData();
+        std::vector<std::vector<double> > getData();
         void setData(unsigned, unsigned, double);
 
         void fillwith(int);
@@ -35,3 +36,5 @@ class Matrix
         Matrix product(Matrix &);
         Matrix timesConstant(double);
 };
+
+#endif //NeuralNetworkC_Matrix_H

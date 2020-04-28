@@ -1,4 +1,4 @@
-#include "Matrix.h"
+#include "../include/Matrix.h"
 #include <vector>
 #include <iostream>
 
@@ -14,7 +14,7 @@ void Matrix::setData(unsigned m, unsigned n, double value)
     this->data[m][n] = value;
 };
 
-vector<vector<double> > Matrix::getData()
+std::vector<std::vector<double> > Matrix::getData()
 {
     return this->data;
 };

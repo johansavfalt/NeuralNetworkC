@@ -9,7 +9,6 @@ typedef double (*activationtype)(double);
 class Relu: public ActivationFunction 
 {
     public:
-
        Matrix activation(Matrix &Z_Matrix);
        Matrix activation_derivative(Matrix &Z_Matrix);
 

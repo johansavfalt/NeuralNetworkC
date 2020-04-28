@@ -2,6 +2,7 @@
 #include "../../include/Activation/Relu.hpp"
 #include "../../include/Matrix.h"
 
+#include <iostream>
 #include <vector>
 #include <algorithm>
 
@@ -31,12 +32,11 @@ Matrix Relu::applyforAllElements(Matrix &Z_Matrix, double (*activationtype)(doub
     for (int i = 0; i < m; i++){
         for (int j = 0; j < n; j++){
 
-            result.setData(i,j,(*activationtype)(result.getValue(i,j)));
-
+            result.setData(i,j, (*activationtype)(Z_Matrix.getValue(i,j)));
         }
     }
 
-    return Matrix(0, 0);
+    return result;
 
 
 };

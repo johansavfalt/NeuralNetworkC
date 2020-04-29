@@ -1,8 +1,6 @@
 #include <iostream>
-#include "Formula.h"
-#include "Matrix.h"
 
 int main() {
-    std::cout << "Bla: " << Formula::bla(10) << std::endl;
+    std::cout << "Bla: "<< std::endl;
     return 0;
 }

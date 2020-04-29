@@ -1,4 +1,4 @@
-#include "../include/Matrix.h"
+#include "../include/Matrix.hpp"
 #include <vector>
 #include <iostream>
 

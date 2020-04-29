@@ -1,5 +1,5 @@
 #include "../lib/googletest/googletest/include/gtest/gtest.h"
-#include "../include/Matrix.h"
+#include "../include/Matrix.hpp"
 
 TEST(MatrixTest, Matrix){
     //arrange

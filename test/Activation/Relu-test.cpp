@@ -1,6 +1,6 @@
 #include "../../lib/googletest/googletest/include/gtest/gtest.h"
 #include "../../include/Activation/Relu.hpp"
-#include "../../include/Matrix.h"
+#include "../../include/Matrix.hpp"
 
 
 TEST(ReluTest, activation){

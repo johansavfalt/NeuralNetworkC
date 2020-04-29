@@ -1,4 +1,4 @@
-#include "../../include/Matrix.h"
+#include "../../include/Matrix.hpp"
 
 class ActivationFunction{
 

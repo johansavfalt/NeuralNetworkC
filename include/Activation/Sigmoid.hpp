@@ -1,12 +1,12 @@
-#ifndef NeuralNetworkC_Relu_H
-#define NeuralNetworkC_Relu_H
+#ifndef NeuralNetworkC_Sigmoid_H
+#define NeuralNetworkC_Sigmoid_H
 
 #include "ActivationFunction.hpp"
 #include "../Matrix.hpp"
 
 typedef double (*activationtype)(double);
 
-class Relu: public ActivationFunction 
+class Sigmoid: public ActivationFunction 
 {
     public:
        Matrix activation(Matrix &Z_Matrix);
@@ -21,4 +21,4 @@ class Relu: public ActivationFunction
 
 
 
-#endif //NeuralNetworkC_Relu_H
+#endif //NeuralNetworkC_Sigmoid_H

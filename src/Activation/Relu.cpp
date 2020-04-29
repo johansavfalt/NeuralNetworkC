@@ -1,6 +1,6 @@
 #include "../../include/Activation/ActivationFunction.hpp"
 #include "../../include/Activation/Relu.hpp"
-#include "../../include/Matrix.h"
+#include "../../include/Matrix.hpp"
 
 #include <iostream>
 #include <vector>

@@ -2,6 +2,8 @@
 #include <vector>
 #include <iostream>
 
+Matrix::Matrix(){};
+
 Matrix::Matrix(unsigned M, unsigned N)
 {
     this->M = M;
@@ -45,6 +47,7 @@ Matrix Matrix::random(unsigned M, unsigned N)
     }
     return A;
 };
+
 Matrix Matrix::transpose()
 {
     Matrix A(M, N);

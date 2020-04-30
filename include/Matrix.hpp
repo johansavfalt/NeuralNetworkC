@@ -12,6 +12,8 @@ class Matrix
     public:
         std::vector<std::vector<double>> data;
 
+        Matrix();
+
         Matrix(unsigned, unsigned);
         static Matrix random(unsigned, unsigned);
 

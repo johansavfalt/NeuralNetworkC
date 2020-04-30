@@ -34,6 +34,14 @@ TEST(MatrixTest,getValue){
     EXPECT_EQ(testMatrix.getValue(2, 2), 2.0);
 }
 
+TEST(MatrixTest, random){
+    Matrix testMatrix = Matrix::random(2, 2);
+    EXPECT_NE(testMatrix.getValue(0, 0), 0.0);
+    EXPECT_NE(testMatrix.getValue(1, 0), 0.0);
+    EXPECT_NE(testMatrix.getValue(0, 1), 0.0);
+    EXPECT_NE(testMatrix.getValue(1, 1), 0.0);
+}
+
 TEST(MatrixTest, transpose){
     //--arrage
     Matrix testMatrix(5, 5);

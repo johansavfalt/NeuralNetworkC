@@ -4,10 +4,10 @@
 
 NeuralLayer::NeuralLayer(unsigned int inputs,
         unsigned int units,
-        ActivationFunction *activation
+        ActivationFunction &activation
         ):
 
-    activation(),
+    activation(activation),
     weights(Matrix::random(inputs, units)),
     bias(1, units),
     deltaBias(1, units),
@@ -27,6 +27,21 @@ Matrix NeuralLayer::layer_forward_propagation(Matrix &Activation_prev)
 {
     this->Activation_prev = Activation_prev;
     this->Z_curr = this->Activation_prev.product(this->weights).plus(this->bias);
-    this->Activation_curr = this->activation->activation(this->Z_curr);
+    this->Activation_curr = this->activation.activation(this->Z_curr);
     return this->Activation_curr;
+};
+
+Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)
+{
+    this->deltaWeights = this->Activation_prev.transpose().product(delta_Aprev);
+    double sum = 0.0;
+    for(int i = 0; i < delta_Aprev.getColumns(); i++){
+        sum += delta_Aprev.getValue(0, i);
+    }
+    this->deltaBias.fillwith(sum);
+    this->deltaCurr = delta_Aprev.product(this->weights.transpose());
+    this->deltaCurr1 = this->deltaCurr.hadamanproduct(
+            this->activation.activation_derivative(this->Activation_prev));
+    return this->deltaCurr1;
+
 };

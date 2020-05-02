@@ -8,13 +8,13 @@ class NeuralLayer
 {
 
     public:
-        NeuralLayer(unsigned int , unsigned int , ActivationFunction*);
+        NeuralLayer(unsigned int , unsigned int , ActivationFunction&);
         Matrix layer_forward_propagation(Matrix&);
         Matrix layer_backward_propagation(Matrix&);
         void updateParameters(double);
 
     private:
-    	ActivationFunction* activation;
+    	ActivationFunction& activation;
 
         Matrix weights_momentum;
         Matrix weights;
@@ -22,10 +22,10 @@ class NeuralLayer
 		Matrix Activation_prev;
         Matrix Activation_curr;
         Matrix Z_curr;
-        //Matrix deltaWeights;
+        Matrix deltaWeights;
         Matrix deltaBias;
-		//Matrix deltaCurr;
-		//Matrix deltaCurr1;
+        Matrix deltaCurr;
+        Matrix deltaCurr1;
         Matrix bias_momentum;
 };
 

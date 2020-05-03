@@ -31,17 +31,17 @@ Matrix NeuralLayer::layer_forward_propagation(Matrix &Activation_prev)
     return this->Activation_curr;
 };
 
-Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)
-{
-    this->deltaWeights = this->Activation_prev.transpose().product(delta_Aprev);
-    double sum = 0.0;
-    for(int i = 0; i < delta_Aprev.getColumns(); i++){
-        sum += delta_Aprev.getValue(0, i);
-    }
-    this->deltaBias.fillwith(sum);
-    this->deltaCurr = delta_Aprev.product(this->weights.transpose());
-    this->deltaCurr1 = this->deltaCurr.hadamanproduct(
-            this->activation.activation_derivative(this->Activation_prev));
-    return this->deltaCurr1;
+/*Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)*/
+//{
+    //this->deltaWeights = this->Activation_prev.transpose().product(delta_Aprev);
+    //double sum = 0.0;
+    //for(int i = 0; i < delta_Aprev.getColumns(); i++){
+        //sum += delta_Aprev.getValue(0, i);
+    //}
+    //this->deltaBias.fillwith(sum);
+    //this->deltaCurr = delta_Aprev.product(this->weights.transpose());
+    //this->deltaCurr1 = this->deltaCurr.hadamanproduct(
+            //this->activation.activation_derivative(this->Activation_prev));
+    //return this->deltaCurr1;
 
-};
+/*}*/;

@@ -8,12 +8,12 @@
 #include <math.h>
 
 
-Matrix Sigmoid::activation(Matrix &Z_Matrix) 
+Matrix Sigmoid::activation(Matrix &Z_Matrix) const 
 {
    return applyforAllElements(Z_Matrix, Sigmoid::activate);
 }
 
-Matrix Sigmoid::activation_derivative(Matrix &Z_Matrix) 
+Matrix Sigmoid::activation_derivative(Matrix &Z_Matrix) const
 {
 
     return applyforAllElements(Z_Matrix, Sigmoid::activate_derivative);
@@ -21,7 +21,7 @@ Matrix Sigmoid::activation_derivative(Matrix &Z_Matrix)
 
 };
 
-Matrix Sigmoid::applyforAllElements(Matrix &Z_Matrix, double (*activationtype)(double)) 
+Matrix Sigmoid::applyforAllElements(Matrix &Z_Matrix, double (*activationtype)(double)) const
 {
     int m = Z_Matrix.getRows();
     int n = Z_Matrix.getColumns();

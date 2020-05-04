@@ -1,11 +1,10 @@
 #include "../include/NeuralLayer.hpp"
 #include "../include/Matrix.hpp"
 #include "Activation/ActivationFunction.hpp"
+#include <iostream>
 
-NeuralLayer::NeuralLayer(unsigned int inputs,
-        unsigned int units,
-        ActivationFunction &activation
-        ):
+NeuralLayer::NeuralLayer(unsigned int inputs, unsigned int units,
+        const ActivationFunction &activation):
 
     activation(activation),
     weights(Matrix::random(inputs, units)),

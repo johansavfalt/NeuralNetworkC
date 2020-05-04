@@ -1,5 +1,5 @@
-#ifndef NeuralNetworkC_Matrix_H
-#define NeuralNetworkC_Matrix_H
+#ifndef NeuralNetworkC_Training_H
+#define NeuralNetworkC_Training_H
 #include "Matrix.hpp"
 
 class Training
@@ -8,11 +8,11 @@ class Training
     private:
 
     public:
-        Matrix compute_cross_entropy_loss(
-                Matrix &data, Matrix &test, boolean derivative);
-        Matrix cross_entropy_loss(
+        static Matrix compute_cross_entropy_loss(
+                Matrix &data, Matrix &test, bool derivative);
+        static Matrix cross_entropy_loss(
                 Matrix &predictDistribution, Matrix &trueDistribution);
 
 
 };
-#endif //NeuralNetworkC_Matrix_H
+#endif //NeuralNetworkC_Training_H

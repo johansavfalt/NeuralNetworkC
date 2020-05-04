@@ -1,11 +1,12 @@
 #include "../include/Training.hpp"
 #include "../include/Matrix.hpp"
 #include <math.h>
+#include <list>
 
-Matrix Training::compute_cross_entropy_loss(Matrix &data, int &test, int derivative)
+Matrix Training::compute_cross_entropy_loss(Matrix &data, Matrix &test, bool derivative)
 {
     if(derivative){
-
+        return data.minus(test);
     } else{
         return cross_entropy_loss(data, test);
     }
@@ -18,14 +19,27 @@ Matrix Training::cross_entropy_loss(Matrix &predictDistribution, Matrix &trueDis
     int M =predictDistribution.getRows();
     std::list<double> batchResult;
 
-    for(int i = 0; i < this->M; i++){
+    for(int i = 0; i < M; i++){
+
         double singleTrue = trueDistribution.getValue(i, 0);
         double singlePred = predictDistribution.getValue(i, 0);
+
         if(singleTrue == 1){
-            error = std::log(singlePred)*-1.0;
+            error = log(singlePred)*-1.0;
         } else{
-            error = std::log(1.0 - singlePred) * -1.0;
+            error = log(1.0 - singlePred) * -1.0;
         }
-        batchResult.add(error);
+        
+        batchResult.push_front(error);
     }
+
+    for(auto x:batchResult){
+
+        error += x;
+
+    }
+    double doubleValue = (1.0/M * error);
+    Matrix result(0, 0);
+    result.fillwith(error);
+    return result;
 }

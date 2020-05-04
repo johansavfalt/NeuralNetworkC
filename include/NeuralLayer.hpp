@@ -8,13 +8,13 @@ class NeuralLayer
 {
 
     public:
-        NeuralLayer(unsigned int , unsigned int , ActivationFunction&);
+        NeuralLayer(unsigned int , unsigned int , const ActivationFunction&);
         Matrix layer_forward_propagation(Matrix&);
         Matrix layer_backward_propagation(Matrix&);
         void updateParameters(double);
 
     private:
-    	ActivationFunction& activation;
+    	const ActivationFunction& activation;
 
         Matrix weights_momentum;
         Matrix weights;

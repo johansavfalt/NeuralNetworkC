@@ -9,14 +9,14 @@ typedef double (*activationtype)(double);
 class Sigmoid: public ActivationFunction 
 {
     public:
-       Matrix activation(Matrix &Z_Matrix);
-       Matrix activation_derivative(Matrix &Z_Matrix);
+       Matrix activation(Matrix &Z_Matrix) const;
+       Matrix activation_derivative(Matrix &Z_Matrix) const;
 
     private:
 
        static double activate(double x);
        static double activate_derivative(double x);
-       Matrix applyforAllElements(Matrix &Z_Matrix, activationtype);
+       Matrix applyforAllElements(Matrix &Z_Matrix, activationtype) const;
 };
 
 

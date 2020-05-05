@@ -21,6 +21,10 @@ NeuralLayer::NeuralLayer(unsigned int inputs, unsigned int units,
 
 };
 
+void NeuralLayer::showWeights(){
+    this->weights.show();
+};
+
 
 Matrix NeuralLayer::layer_forward_propagation(Matrix &Activation_prev)
 {

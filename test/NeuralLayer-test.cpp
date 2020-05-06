@@ -29,14 +29,20 @@ TEST(NeuralLayer, layer_forward_propagation){
     matrixData->setData(3, 1, 0.0);
 
     for(auto const& layer : NeuralNetwork){
+        std::cout << matrixData << std::endl;
         auto layerInput = std::make_shared<Matrix>(*matrixData);
+        //TODO: something wrong with this
+        std::cout << layerInput << std::endl;
         matrixData = std::make_shared<Matrix>(layer->layer_forward_propagation(*layerInput));
-        matrixData->show();
+        std::cout << matrixData << std::endl;
+
     }
+        std::cout << matrixData << std::endl;
+        std::cout << "1" << std::endl;
 }
 
 
-TEST(NeuralLayer, layer_backward_propagation){
+/*TEST(NeuralLayer, layer_backward_propagation){*/
 
-    //TODO: test backwardlayer
-}
+    ////TODO: test backwardlayer
+/*}*/

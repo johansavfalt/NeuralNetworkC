@@ -1,6 +1,7 @@
 #include "../include/Matrix.hpp"
 #include <vector>
 #include <iostream>
+#include <memory>
 
 Matrix::Matrix(){};
 
@@ -36,13 +37,14 @@ double Matrix::getValue(unsigned M,unsigned N)
 }
 
 
-Matrix Matrix::random(unsigned M, unsigned N)
+std::unique_ptr<Matrix> Matrix::random(unsigned M, unsigned N)
 {
-    Matrix A(M, N);
+    auto A = std::make_unique<Matrix>(M, N);
+
     for(unsigned i = 0; i < M; i++){
         for(unsigned j = 0; j < N;j++){
             double f = (double)rand() / RAND_MAX;
-            A.setData(i, j, f);
+            A->setData(i, j, f);
         }
     }
     return A;
@@ -68,25 +70,26 @@ void Matrix::fillwith(double value)
     }
 };
 
-Matrix Matrix::plus(Matrix &B){
-    if (B.getColumns() != this->getColumns() || B.getRows() != this->getRows()){
+std::shared_ptr<Matrix> Matrix::plus(std::shared_ptr<Matrix> B){
+    if (B->getColumns() != this->getColumns() || B->getRows() != this->getRows()){
         B = this->getAdjustedMatrix(B, this->getRows());
     }
-    Matrix C(M, N);
+    auto C = std::make_unique<Matrix>(M, N);
+
     for(int i = 0;i < M;i++){
         for(int j = 0;j< N;j++){
-            C.setData(i, j, this->getValue(i,j)+ B.getValue(i, j));
+            C->setData(i, j, this->getValue(i,j)+ B->getValue(i, j));
         }
     }
     return C;
 };
 
-Matrix Matrix::getAdjustedMatrix(Matrix &B, const int n)
+std::shared_ptr<Matrix> Matrix::getAdjustedMatrix(std::shared_ptr<Matrix> B, const int n)
 {
-    Matrix C(M, N);
+    auto C = std::make_shared<Matrix>(M, N);
     for(int i = 0; i < this->M; i++){
         for(int j = 0; j < n; j++){
-            C.setData(i, j, B.getValue(0, j));
+            C->setData(i, j, B->getValue(0, j));
         }
     }
     return C;
@@ -119,20 +122,21 @@ Matrix Matrix::minusConstant(double constant)
 };
 
 
-Matrix Matrix::product(Matrix &B) {
-        if (this->N != B.M) throw std::runtime_error("Illegal matrix dimensions.");
+std::shared_ptr<Matrix> Matrix::product(std::shared_ptr<Matrix> B) {
+        if (this->N != B->M) throw std::runtime_error("Illegal matrix dimensions.");
 
-        Matrix C(this->M, B.N);
+        std::shared_ptr<Matrix> C = std::make_shared<Matrix>(this->M, B->N);
 
         for (int i = 0; i < this->M; i++){
-            for (int j = 0; j < B.N; j++){
+            for (int j = 0; j < B->N; j++){
                 for (int k = 0; k < this->N; k++){
-                    C.data[i][j] += (this->data[i][k] * B.data[k][j]);
+                    C->data[i][j] += (this->data[i][k] * B->data[k][j]);
                 }
             }
         }
         return C;
     }
+
 Matrix Matrix::sum()
 {
     double result = 0.0;

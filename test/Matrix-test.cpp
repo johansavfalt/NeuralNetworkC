@@ -109,6 +109,8 @@ TEST(MatrixTest, minusConstant){
     }
 }
 TEST(MatrixTest, product){
+
+    //TODO: redo all this with smartpointers
     Matrix testMatrix_1(2, 2);
     Matrix testMatrix_2(2, 2);
 

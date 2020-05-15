@@ -28,13 +28,13 @@ TEST(NeuralLayer, layer_forward_propagation){
     matrixData->setData(3, 0, 0.0);
     matrixData->setData(3, 1, 0.0);
 
-    for(auto const& layer : NeuralNetwork){
+    for(auto layer : NeuralNetwork){
         auto layerInput = matrixData;
         matrixData = layer->layer_forward_propagation(layerInput);
 
     }
         //std::cout << "1" << std::endl;
-}
+};
 
 
 /*TEST(NeuralLayer, layer_backward_propagation){*/

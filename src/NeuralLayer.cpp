@@ -18,7 +18,6 @@ NeuralLayer::NeuralLayer(unsigned int inputs, unsigned int units,
     Activation_curr()
 
 {
-    //this->bias = make_unique<Matrix>(1, units);
     bias->fillwith(1.0);
 
 };
@@ -28,7 +27,8 @@ void NeuralLayer::showWeights(){
 };
 
 
-std::shared_ptr<Matrix> NeuralLayer::layer_forward_propagation(std::shared_ptr<Matrix> Activation_prev)
+std::shared_ptr<Matrix> NeuralLayer::layer_forward_propagation(
+        std::shared_ptr<Matrix> Activation_prev)
 {
     this->Activation_prev = Activation_prev;
     this->Z_curr = this->Activation_prev->product(this->weights)->plus(this->bias);

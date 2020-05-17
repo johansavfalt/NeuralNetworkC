@@ -28,15 +28,15 @@ class Matrix
         void fillwith(double);
         void show();
         Matrix transpose();
-        std::shared_ptr<Matrix> plus(std::shared_ptr<Matrix>);
+        std::unique_ptr<Matrix> plus(std::unique_ptr<Matrix> &);
         Matrix minus(Matrix &);
-        std::shared_ptr<Matrix> getAdjustedMatrix(std::shared_ptr<Matrix> Matrix ,const int);
+        std::unique_ptr<Matrix> getAdjustedMatrix(std::unique_ptr<Matrix> &,const int);
         Matrix minusConstant(double);
         Matrix times(Matrix &);
         Matrix sum();
         Matrix max();
         Matrix hadamanproduct(Matrix &);
-        std::shared_ptr<Matrix> product(std::shared_ptr<Matrix>);
+        std::unique_ptr<Matrix> product(std::unique_ptr<Matrix> &);
         Matrix timesConstant(double);
 };
 

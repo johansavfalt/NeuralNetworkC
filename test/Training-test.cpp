@@ -34,7 +34,7 @@ TEST(pointertest, testingwithpointer){
     for(auto layer: layers){
         std::shared_ptr<Matrix> layerInput = matrixData;
         matrixData = layer->test(layerInput);
-        matrixData->show();
+        //matrixData->show();
 
     }
 

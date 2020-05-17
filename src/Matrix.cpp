@@ -70,7 +70,7 @@ void Matrix::fillwith(double value)
     }
 };
 
-std::shared_ptr<Matrix> Matrix::plus(std::shared_ptr<Matrix> B){
+std::unique_ptr<Matrix> Matrix::plus(std::unique_ptr<Matrix> &B){
     if (B->getColumns() != this->getColumns() || B->getRows() != this->getRows()){
         B = this->getAdjustedMatrix(B, this->getRows());
     }
@@ -84,9 +84,9 @@ std::shared_ptr<Matrix> Matrix::plus(std::shared_ptr<Matrix> B){
     return C;
 };
 
-std::shared_ptr<Matrix> Matrix::getAdjustedMatrix(std::shared_ptr<Matrix> B, const int n)
+std::unique_ptr<Matrix> Matrix::getAdjustedMatrix(std::unique_ptr<Matrix> &B, const int n)
 {
-    auto C = std::make_shared<Matrix>(M, N);
+    auto C = std::make_unique<Matrix>(M, N);
     for(int i = 0; i < this->M; i++){
         for(int j = 0; j < n; j++){
             C->setData(i, j, B->getValue(0, j));
@@ -122,10 +122,10 @@ Matrix Matrix::minusConstant(double constant)
 };
 
 
-std::shared_ptr<Matrix> Matrix::product(std::shared_ptr<Matrix> B) {
+std::unique_ptr<Matrix> Matrix::product(std::unique_ptr<Matrix> &B) {
         if (this->N != B->M) throw std::runtime_error("Illegal matrix dimensions.");
 
-        std::shared_ptr<Matrix> C = std::make_shared<Matrix>(this->M, B->N);
+        std::unique_ptr<Matrix> C = std::make_unique<Matrix>(this->M, B->N);
 
         for (int i = 0; i < this->M; i++){
             for (int j = 0; j < B->N; j++){

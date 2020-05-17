@@ -10,12 +10,13 @@ TEST(NeuralLayer, layer_forward_propagation){
 
     std::list<std::shared_ptr<NeuralLayer>> NeuralNetwork;
 
-    NeuralNetwork.push_back(std::make_shared<NeuralLayer>(2, 4, Relu()));
-    NeuralNetwork.push_back(std::make_shared<NeuralLayer>(4, 4, Relu()));
-    NeuralNetwork.push_back(std::make_shared<NeuralLayer>(4, 2, Relu()));
-    NeuralNetwork.push_back(std::make_shared<NeuralLayer>(2, 1, Relu()));
+    NeuralNetwork.push_back(std::make_unique<NeuralLayer>(2, 4, Relu()));
+    NeuralNetwork.push_back(std::make_unique<NeuralLayer>(4, 4, Relu()));
+    NeuralNetwork.push_back(std::make_unique<NeuralLayer>(4, 2, Relu()));
+    NeuralNetwork.push_back(std::make_unique<NeuralLayer>(2, 1, Relu()));
 
     auto matrixData = std::make_shared<Matrix>(4, 2);
+
     matrixData->setData(0, 0, 1.0);
     matrixData->setData(0, 1, 0.0);
 
@@ -28,13 +29,15 @@ TEST(NeuralLayer, layer_forward_propagation){
     matrixData->setData(3, 0, 0.0);
     matrixData->setData(3, 1, 0.0);
 
-    for(auto layer : NeuralNetwork){
+    for(auto const& layer : NeuralNetwork){
         auto layerInput = matrixData;
+        matrixData->show();
+        layer->showWeights();
         matrixData = layer->layer_forward_propagation(layerInput);
 
     }
         //std::cout << "1" << std::endl;
-};
+}
 
 
 /*TEST(NeuralLayer, layer_backward_propagation){*/

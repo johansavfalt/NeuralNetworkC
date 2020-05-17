@@ -16,15 +16,16 @@ class NeuralLayer
         void showWeights();
 
     private:
-    	const ActivationFunction& activation;
-        std::shared_ptr<Matrix> Activation_curr_1;
+    	const ActivationFunction &activation;
+
+        std::shared_ptr<Matrix> Activation_curr;
         std::shared_ptr<Matrix> Activation_prev;
 
+        std::unique_ptr<Matrix> weights;
+        std::unique_ptr<Matrix> bias;
+        std::unique_ptr<Matrix> Z_curr;
+
         Matrix weights_momentum;
-        std::shared_ptr<Matrix> weights;
-        std::shared_ptr<Matrix> bias;
-        Matrix Activation_curr;
-        std::shared_ptr<Matrix> Z_curr;
         Matrix deltaWeights;
         Matrix deltaBias;
         Matrix deltaCurr;

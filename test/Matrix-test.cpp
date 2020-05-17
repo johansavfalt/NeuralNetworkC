@@ -36,7 +36,9 @@ TEST(MatrixTest,getValue){
 
 TEST(MatrixTest, random){
     //auto testMatrix = std::make_shared<Matrix>(2, 2);
-    auto testMatrix = Matrix::random(2, 2);
+    //std::unique_ptr<Matrix> testMatrix = std::unique_ptr<Matrix::random(2, 2)>;
+    //auto testMatrix = std::unique_ptr<Matrix::random(2, 2)>;
+    std::unique_ptr<Matrix> testMatrix = Matrix::random(2, 2);
     EXPECT_NE(testMatrix->getValue(0, 0), 0.0);
     EXPECT_NE(testMatrix->getValue(1, 0), 0.0);
     EXPECT_NE(testMatrix->getValue(0, 1), 0.0);
@@ -67,8 +69,8 @@ TEST(MatrixTest, fillwith){
     }
 }
 TEST(MatrixTest, plus){
-    auto testMatrix_1 = std::make_shared<Matrix>(2, 2);
-    auto testMatrix_2 = std::make_shared<Matrix>(2, 2);
+    auto testMatrix_1 = std::make_unique<Matrix>(2, 2);
+    auto testMatrix_2 = std::make_unique<Matrix>(2, 2);
 
     testMatrix_1->fillwith(1.0);
     testMatrix_2->fillwith(1.0);
@@ -111,8 +113,8 @@ TEST(MatrixTest, minusConstant){
 }
 TEST(MatrixTest, product){
 
-    auto testMatrix_1 = std::make_shared<Matrix>(2, 2);
-    auto testMatrix_2 = std::make_shared<Matrix>(2, 2);
+    auto testMatrix_1 = std::make_unique<Matrix>(2, 2);
+    auto testMatrix_2 = std::make_unique<Matrix>(2, 2);
 
     testMatrix_1->fillwith(5.0);
     testMatrix_2->fillwith(5.0);

@@ -37,14 +37,14 @@ double Matrix::getValue(unsigned M,unsigned N)
 }
 
 
-std::unique_ptr<Matrix> Matrix::random(unsigned M, unsigned N)
+Matrix Matrix::random(unsigned M, unsigned N)
 {
-    auto A = std::make_unique<Matrix>(M, N);
+    auto A = Matrix(M, N);
 
     for(unsigned i = 0; i < M; i++){
         for(unsigned j = 0; j < N;j++){
             double f = (double)rand() / RAND_MAX;
-            A->setData(i, j, f);
+            A.setData(i, j, f);
         }
     }
     return A;
@@ -70,26 +70,26 @@ void Matrix::fillwith(double value)
     }
 };
 
-std::unique_ptr<Matrix> Matrix::plus(std::unique_ptr<Matrix> &B){
-    if (B->getColumns() != this->getColumns() || B->getRows() != this->getRows()){
+Matrix Matrix::plus(Matrix &B){
+    if (B.getColumns() != this->getColumns() || B.getRows() != this->getRows()){
         B = this->getAdjustedMatrix(B, this->getRows());
     }
-    auto C = std::make_unique<Matrix>(M, N);
+    auto C = Matrix(M, N);
 
     for(int i = 0;i < M;i++){
         for(int j = 0;j< N;j++){
-            C->setData(i, j, this->getValue(i,j)+ B->getValue(i, j));
+            C.setData(i, j, this->getValue(i,j)+ B.getValue(i, j));
         }
     }
     return C;
 };
 
-std::unique_ptr<Matrix> Matrix::getAdjustedMatrix(std::unique_ptr<Matrix> &B, const int n)
+Matrix Matrix::getAdjustedMatrix(Matrix &B, const int n)
 {
-    auto C = std::make_unique<Matrix>(M, N);
+    auto C = Matrix(M, N);
     for(int i = 0; i < this->M; i++){
         for(int j = 0; j < n; j++){
-            C->setData(i, j, B->getValue(0, j));
+            C.setData(i, j, B.getValue(0, j));
         }
     }
     return C;
@@ -122,15 +122,15 @@ Matrix Matrix::minusConstant(double constant)
 };
 
 
-std::unique_ptr<Matrix> Matrix::product(std::unique_ptr<Matrix> &B) {
-        if (this->N != B->M) throw std::runtime_error("Illegal matrix dimensions.");
+Matrix Matrix::product(Matrix &B) {
+        if (this->N != B.M) throw std::runtime_error("Illegal matrix dimensions.");
 
-        std::unique_ptr<Matrix> C = std::make_unique<Matrix>(this->M, B->N);
+        Matrix C = Matrix(this->M, B.N);
 
         for (int i = 0; i < this->M; i++){
-            for (int j = 0; j < B->N; j++){
+            for (int j = 0; j < B.N; j++){
                 for (int k = 0; k < this->N; k++){
-                    C->data[i][j] += (this->data[i][k] * B->data[k][j]);
+                    C.data[i][j] += (this->data[i][k] * B.data[k][j]);
                 }
             }
         }

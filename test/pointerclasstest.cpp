@@ -9,9 +9,35 @@ class testclass{
 
     public:
         std::shared_ptr<Matrix> test(std::shared_ptr<Matrix> matrix);
-
+        std::shared_ptr<Matrix> test_unique(std::unique_ptr<Matrix> &);
+        std::shared_ptr<Matrix> receiveUnique(std::unique_ptr<Matrix> &);
 
 };
+
+
+std::shared_ptr<Matrix> testclass::test_unique(std::unique_ptr<Matrix> &uniqueParameter){
+
+    return this->receiveUnique(uniqueParameter);
+
+    //return std::make_shared<Matrix>(1, 1);
+
+};
+
+std::shared_ptr<Matrix> testclass::receiveUnique(std::unique_ptr<Matrix> &uniqueParameter){
+    uniqueParameter->show();
+    return std::make_shared<Matrix>(2, 2);
+
+};
+
+
+
+
+
+
+
+
+
+
 
 std::shared_ptr<Matrix> testclass::test(std::shared_ptr<Matrix> matrix){
         //matrix->show();
@@ -30,4 +56,10 @@ std::shared_ptr<Matrix> testclass::test(std::shared_ptr<Matrix> matrix){
         //std::cout << matrix->getValue(0, 0) << std::endl;
 
 }
+
+
+
+
+
+
 

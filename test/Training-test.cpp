@@ -1,6 +1,7 @@
 #include "../lib/googletest/googletest/include/gtest/gtest.h"
 #include "../include/Training.hpp"
 #include "../include/Matrix.hpp"
+#include "../include/Activation/Relu.hpp"
 #include "pointerclasstest.cpp"
 
 #include <memory>
@@ -38,6 +39,16 @@ TEST(pointertest, testingwithpointer){
 
     }
 
+
+}
+
+TEST(Training, pointertesting){
+    //auto sharedtest = std::make_shared<Matrix>(1, 1);
+    auto uniquetest = std::make_unique<Matrix>(1, 1);
+    auto testclass_ptr = std::make_unique<testclass>();
+
+    auto sharedtest = testclass_ptr->test_unique(uniquetest);
+    sharedtest->show();
 
 }
 

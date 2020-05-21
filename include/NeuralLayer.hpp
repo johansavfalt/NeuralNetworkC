@@ -10,20 +10,20 @@ class NeuralLayer
 
     public:
         NeuralLayer(unsigned int , unsigned int , const ActivationFunction&);
-        std::shared_ptr<Matrix> layer_forward_propagation(std::shared_ptr<Matrix>);
-        Matrix layer_backward_propagation(Matrix&);
+        Matrix layer_forward_propagation(Matrix);
+        Matrix layer_backward_propagation(Matrix &);
         void updateParameters(double);
         void showWeights();
 
     private:
     	const ActivationFunction &activation;
 
-        std::shared_ptr<Matrix> Activation_curr;
-        std::shared_ptr<Matrix> Activation_prev;
+        Matrix Activation_curr;
+        Matrix Activation_prev;
 
-        std::unique_ptr<Matrix> weights;
-        std::unique_ptr<Matrix> bias;
-        std::unique_ptr<Matrix> Z_curr;
+        Matrix weights;
+        Matrix bias;
+        Matrix Z_curr;
 
         Matrix weights_momentum;
         Matrix deltaWeights;

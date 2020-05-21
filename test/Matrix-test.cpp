@@ -35,14 +35,14 @@ TEST(MatrixTest,getValue){
 }
 
 TEST(MatrixTest, random){
-    //auto testMatrix = std::make_shared<Matrix>(2, 2);
-    //std::unique_ptr<Matrix> testMatrix = std::unique_ptr<Matrix::random(2, 2)>;
+    //auto testMatrix = Matrix(2, 2);
+    //Matrix testMatrix = std::unique_ptr<Matrix::random(2, 2)>;
     //auto testMatrix = std::unique_ptr<Matrix::random(2, 2)>;
-    std::unique_ptr<Matrix> testMatrix = Matrix::random(2, 2);
-    EXPECT_NE(testMatrix->getValue(0, 0), 0.0);
-    EXPECT_NE(testMatrix->getValue(1, 0), 0.0);
-    EXPECT_NE(testMatrix->getValue(0, 1), 0.0);
-    EXPECT_NE(testMatrix->getValue(1, 1), 0.0);
+    Matrix testMatrix = Matrix::random(2, 2);
+    EXPECT_NE(testMatrix.getValue(0, 0), 0.0);
+    EXPECT_NE(testMatrix.getValue(1, 0), 0.0);
+    EXPECT_NE(testMatrix.getValue(0, 1), 0.0);
+    EXPECT_NE(testMatrix.getValue(1, 1), 0.0);
 }
 
 TEST(MatrixTest, transpose){
@@ -69,17 +69,17 @@ TEST(MatrixTest, fillwith){
     }
 }
 TEST(MatrixTest, plus){
-    auto testMatrix_1 = std::make_unique<Matrix>(2, 2);
-    auto testMatrix_2 = std::make_unique<Matrix>(2, 2);
+    auto testMatrix_1 = Matrix(2, 2);
+    auto testMatrix_2 = Matrix(2, 2);
 
-    testMatrix_1->fillwith(1.0);
-    testMatrix_2->fillwith(1.0);
+    testMatrix_1.fillwith(1.0);
+    testMatrix_2.fillwith(1.0);
 
-    auto plusResult = testMatrix_1->plus(testMatrix_2);
+    auto plusResult = testMatrix_1.plus(testMatrix_2);
 
     for(unsigned i = 0; i < 2; i++){
         for(unsigned j = 0; j < 2; j++){
-            EXPECT_EQ(plusResult->getData()[i][j], 2.0);
+            EXPECT_EQ(plusResult.getData()[i][j], 2.0);
         }
     }
 }
@@ -113,17 +113,17 @@ TEST(MatrixTest, minusConstant){
 }
 TEST(MatrixTest, product){
 
-    auto testMatrix_1 = std::make_unique<Matrix>(2, 2);
-    auto testMatrix_2 = std::make_unique<Matrix>(2, 2);
+    auto testMatrix_1 = Matrix(2, 2);
+    auto testMatrix_2 = Matrix(2, 2);
 
-    testMatrix_1->fillwith(5.0);
-    testMatrix_2->fillwith(5.0);
+    testMatrix_1.fillwith(5.0);
+    testMatrix_2.fillwith(5.0);
 
-    auto productTest = testMatrix_1->product(testMatrix_2);
+    auto productTest = testMatrix_1.product(testMatrix_2);
 
     for(unsigned i = 0; i < 2; i++){
         for(unsigned j = 0; j < 2; j++){
-            EXPECT_EQ(productTest->getValue(i, j), 50.0);
+            EXPECT_EQ(productTest.getValue(i, j), 50.0);
         }
     }
 }

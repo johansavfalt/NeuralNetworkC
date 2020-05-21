@@ -16,7 +16,7 @@ class Matrix
 
         Matrix(unsigned, unsigned);
 
-        static std::unique_ptr<Matrix> random(unsigned, unsigned);
+        static Matrix random(unsigned, unsigned);
 
         int getColumns();
         int getRows();
@@ -28,15 +28,15 @@ class Matrix
         void fillwith(double);
         void show();
         Matrix transpose();
-        std::unique_ptr<Matrix> plus(std::unique_ptr<Matrix> &);
+        Matrix plus(Matrix &);
         Matrix minus(Matrix &);
-        std::unique_ptr<Matrix> getAdjustedMatrix(std::unique_ptr<Matrix> &,const int);
+        Matrix getAdjustedMatrix(Matrix &,const int);
         Matrix minusConstant(double);
         Matrix times(Matrix &);
         Matrix sum();
         Matrix max();
         Matrix hadamanproduct(Matrix &);
-        std::unique_ptr<Matrix> product(std::unique_ptr<Matrix> &);
+        Matrix product(Matrix &);
         Matrix timesConstant(double);
 };
 

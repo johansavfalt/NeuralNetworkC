@@ -9,7 +9,7 @@ NeuralLayer::NeuralLayer(unsigned int inputs, unsigned int units,
     activation(activation),
     weights(Matrix::random(inputs, units)),
     //bias(1, units),
-    bias(std::make_unique<Matrix>(1, units)),
+    bias(Matrix(1, units)),
     deltaBias(1, units),
     weights_momentum(inputs, units),
     bias_momentum(1, units),
@@ -19,24 +19,24 @@ NeuralLayer::NeuralLayer(unsigned int inputs, unsigned int units,
 
 {
     //this->bias = make_unique<Matrix>(1, units);
-    bias->fillwith(1.0);
+    bias.fillwith(1.0);
 
 };
 
 void NeuralLayer::showWeights(){
-    this->weights->show();
+    this->weights.show();
 };
 
 
-std::shared_ptr<Matrix> NeuralLayer::layer_forward_propagation(std::shared_ptr<Matrix> Activation_prev)
+Matrix NeuralLayer::layer_forward_propagation(Matrix Activation_prev)
 {
 
-    this->Activation_prev = std::shared_ptr<Matrix>(Activation_prev);
-    this->Z_curr = this->Activation_prev->product(this->weights)->plus(this->bias);
+    this->Activation_prev = Matrix(Activation_prev);
+    //this->Z_curr = this->Activation_prev->product(this->weights)->plus(this->bias);
     // TODO : redo activationfunction with smartpointer unique
     //this->Activation_curr = this->activation.activation(this->Z_curr);
     //return this->Activation_curr;
-    return std::make_shared<Matrix>(1, 1);
+    return Matrix(1, 1);
 };
 
 /*Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)*/

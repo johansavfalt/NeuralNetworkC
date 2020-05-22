@@ -8,36 +8,41 @@
 
 TEST(NeuralLayer, layer_forward_propagation){
 
-    std::list<NeuralLayer> NeuralNetwork;
+    //std::vector<NeuralLayer> NeuralNetwork;
 
-    NeuralNetwork.push_back(NeuralLayer(2, 4, Relu()));
-    NeuralNetwork.push_back(NeuralLayer(4, 4, Relu()));
-    NeuralNetwork.push_back(NeuralLayer(4, 2, Relu()));
-    NeuralNetwork.push_back(NeuralLayer(2, 1, Relu()));
+    //NeuralLayer layer_1(2, 4, Relu());
+    //NeuralLayer layer_2(4, 4, Relu());
+    //NeuralLayer layer_3(4, 2, Relu());
+    //NeuralLayer layer_4(2, 1, Relu());
 
-    auto matrixData = Matrix(4, 2);
+    //NeuralNetwork.push_back(layer_1);
+    //NeuralNetwork.push_back(layer_2);
+    //NeuralNetwork.push_back(layer_3);
+    //NeuralNetwork.push_back(layer_4);
 
-    matrixData.setData(0, 0, 1.0);
-    matrixData.setData(0, 1, 0.0);
+    //Matrix matrixData = Matrix(4, 2);
 
-    matrixData.setData(1, 0, 0.0);
-    matrixData.setData(1, 1, 1.0);
+    //matrixData.setData(0, 0, 1.0);
+    //matrixData.setData(0, 1, 0.0);
 
-    matrixData.setData(2, 0, 1.0);
-    matrixData.setData(2, 1, 1.0);
+    //matrixData.setData(1, 0, 0.0);
+    //matrixData.setData(1, 1, 1.0);
 
-    matrixData.setData(3, 0, 0.0);
-    matrixData.setData(3, 1, 0.0);
+    //matrixData.setData(2, 0, 1.0);
+    //matrixData.setData(2, 1, 1.0);
 
-    for(auto layer : NeuralNetwork){
-        auto layerInput = matrixData;
+    //matrixData.setData(3, 0, 0.0);
+    //matrixData.setData(3, 1, 0.0);
 
-        //matrixData.show();
-        //layer.showWeights();
+    //for(auto layer : NeuralNetwork){
+        //auto layerInput = matrixData;
 
-        matrixData = layer.layer_forward_propagation(layerInput);
+        ////matrixData.show();
+        ////layer.showWeights();
 
-    }
+        //matrixData = layer.layer_forward_propagation(layerInput);
+
+    //}
         //std::cout << "1" << std::endl;
 }
 

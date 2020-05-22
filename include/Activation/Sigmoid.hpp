@@ -16,7 +16,7 @@ class Sigmoid: public ActivationFunction
 
        static double activate(double x);
        static double activate_derivative(double x);
-       Matrix applyforAllElements(Matrix &, double (*activationtype)(double)) const;
+       Matrix applyforAllElements(Matrix &, double (*activationtype)(double));
 };
 
 

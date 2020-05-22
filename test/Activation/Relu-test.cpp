@@ -1,7 +1,11 @@
 #include "../../lib/googletest/googletest/include/gtest/gtest.h"
 #include "../../include/Activation/Relu.hpp"
 #include "../../include/Matrix.hpp"
+#include "../../include/NeuralLayer.hpp"
 
+TEST(ReluTest, NeuralLayerActivation){
+    NeuralLayer neurallayerTest(1, 1, Relu());
+}
 
 TEST(ReluTest, activation){
     Matrix testMatrix_1(2, 2);

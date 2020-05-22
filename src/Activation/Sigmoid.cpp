@@ -21,7 +21,7 @@ Matrix Sigmoid::activation_derivative(Matrix &Z_Matrix)
 
 };
 
-Matrix Sigmoid::applyforAllElements(Matrix &Z_Matrix, double (*activationtype)(double)) const
+Matrix Sigmoid::applyforAllElements(Matrix &Z_Matrix, double (*activationtype)(double))
 {
     int m = Z_Matrix.getRows();
     int n = Z_Matrix.getColumns();

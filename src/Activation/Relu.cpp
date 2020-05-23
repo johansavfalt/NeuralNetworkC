@@ -7,12 +7,12 @@
 #include <algorithm>
 
 
-Matrix Relu::activation(Matrix &Z_Matrix)
+Matrix Relu::activation(Matrix &Z_Matrix) const
 {
    return applyforAllElements(Z_Matrix, Relu::activate);
 }
 
-Matrix Relu::activation_derivative(Matrix &Z_Matrix)
+Matrix Relu::activation_derivative(Matrix &Z_Matrix) const
 {
 
     return applyforAllElements(Z_Matrix, Relu::activate_derivative);
@@ -20,7 +20,7 @@ Matrix Relu::activation_derivative(Matrix &Z_Matrix)
 
 };
 
-Matrix Relu::applyforAllElements(Matrix &Z_Matrix,double (*activationtype)(double))
+Matrix Relu::applyforAllElements(Matrix &Z_Matrix,double (*activationtype)(double)) const
 {
     int m = Z_Matrix.getRows();
     int n = Z_Matrix.getColumns();

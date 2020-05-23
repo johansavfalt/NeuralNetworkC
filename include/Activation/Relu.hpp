@@ -9,15 +9,15 @@ typedef double (*activationtype)(double);
 class Relu: public ActivationFunction 
 {
     public:
-        Matrix activation(Matrix &);
-        Matrix activation_derivative(Matrix &);
+        Matrix activation(Matrix &) const;
+        Matrix activation_derivative(Matrix &) const;
 
     private:
 
        static double activate(double x);
        static double activate_derivative(double x);
 
-       Matrix applyforAllElements(Matrix &, double (*activationtype)(double));
+       Matrix applyforAllElements(Matrix &, double (*activationtype)(double)) const;
 
 };
 

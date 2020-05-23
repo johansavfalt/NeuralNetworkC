@@ -26,15 +26,14 @@ void NeuralLayer::showWeights(){
 };
 
 
-Matrix NeuralLayer::layer_forward_propagation(Matrix Activation_prev)
+Matrix NeuralLayer::layer_forward_propagation(Matrix &activation_prev)
 {
 
-    this->Activation_prev = Activation_prev;
+    this->Activation_prev = activation_prev;
     this->Z_curr = this->Activation_prev.product(this->weights).plus(this->bias);
-    // TODO : redo activationfunction with smartpointer unique
-    //this->Activation_curr = this->activation.activation(this->Z_curr);
-    //return this->Activation_curr;
-    return Matrix(1, 1);
+    this->Activation_curr = this->activation.activation(this->Z_curr);
+    return this->Activation_curr;
+    //return Matrix(1, 1);
 };
 
 /*Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)*/

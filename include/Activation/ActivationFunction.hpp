@@ -7,8 +7,8 @@ class ActivationFunction
 {
 
     public:
-        virtual Matrix activation(Matrix &) = 0;
-        virtual Matrix activation_derivative(Matrix &) = 0;
+        virtual Matrix activation(Matrix &) const = 0;
+        virtual Matrix activation_derivative(Matrix &) const = 0;
 
 };
 

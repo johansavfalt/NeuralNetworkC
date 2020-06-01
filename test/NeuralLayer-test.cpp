@@ -48,19 +48,8 @@ TEST(NeuralLayer, layer_backward_propagation){
     NeuralNetwork.push_back(NeuralLayer(4, 4, Relu()));
     NeuralNetwork.push_back(NeuralLayer(4, 1, Sigmoid()));
 
-    Matrix trueDistribution(1, 4);
-    trueDistribution.setData(0, 0, 0.0);
-    trueDistribution.setData(0, 1, 1.0);
-    trueDistribution.setData(0, 2, 0.0);
-    trueDistribution.setData(0, 3, 1.0);
-
- 
-    Matrix testMatrix(4, 1);
-    testMatrix.fillwith(1.0);
-
-    auto loss = Training::compute_cross_entropy_loss(testMatrix, trueDistribution, false);
-    auto lossDerivative = Training::compute_cross_entropy_loss(testMatrix, trueDistribution, true);
-
+    Matrix loss(1, 1);
+    loss.fillwith(0.777);
 
     for(auto it = NeuralNetwork.rbegin(); it != NeuralNetwork.rend(); ++it){
         //it->showWeights();

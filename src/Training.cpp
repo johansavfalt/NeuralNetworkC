@@ -16,14 +16,15 @@ Matrix Training::compute_cross_entropy_loss(Matrix &data, Matrix &test, bool der
 
 Matrix Training::cross_entropy_loss(Matrix &predictDistribution, Matrix &trueDistribution){
 
-    double error = 0.0;
-    int M =predictDistribution.getRows();
+    double endError;
+    int M = predictDistribution.getRows();
 
     std::vector<double> batchResult;
 
 
     for(int i = 0; i < M; i++){
 
+        double error;
         double singleTrue = trueDistribution.getValue(0, i);
         double singlePred = predictDistribution.getValue(i, 0);
 
@@ -37,14 +38,14 @@ Matrix Training::cross_entropy_loss(Matrix &predictDistribution, Matrix &trueDis
         batchResult.push_back(error);
     }
 
-    for(auto x:batchResult){
 
-        error += x;
+    for(auto x : batchResult){
+        endError += x;
     }
 
 
-    double doubleValue = (1.0/M * error);
+    double doubleValue = (1.0/M * endError);
     Matrix result(1, 1);
-    result.fillwith(error);
+    result.fillwith(doubleValue);
     return result;
 }

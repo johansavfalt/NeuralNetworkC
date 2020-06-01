@@ -2,28 +2,29 @@
 #include "../include/Training.hpp"
 #include "../include/Matrix.hpp"
 #include "../include/Activation/Relu.hpp"
-#include "pointerclasstest.cpp"
 
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <math.h>
+
 
 TEST(Training, cross_entropy_loss){
     Matrix predictDistribution(4, 1);
     Matrix trueDistribution(1, 4);
 
-    predictDistribution.setData(0, 0, 14.332);
-    predictDistribution.setData(1, 0, 13.323);
-    predictDistribution.setData(2, 0, 88.332);
-    predictDistribution.setData(3, 0, 12.113);
+    predictDistribution.setData(0, 0, 0.4333);
+    predictDistribution.setData(1, 0, 0.3231);
+    predictDistribution.setData(2, 0, 0.3321);
+    predictDistribution.setData(3, 0, 0.1131);
 
     trueDistribution.setData(0, 0, 0.0);
     trueDistribution.setData(0, 1, 1.0);
     trueDistribution.setData(0, 2, 0.0);
     trueDistribution.setData(0, 3, 1.0);
 
-    Training::cross_entropy_loss(predictDistribution, trueDistribution);
 
+    EXPECT_NEAR(Training::cross_entropy_loss(predictDistribution, trueDistribution).getValue(0, 0), 1.0702, 0.001);
 
 }
 

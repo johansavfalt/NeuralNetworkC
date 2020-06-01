@@ -71,14 +71,12 @@ void Matrix::fillwith(double value)
 };
 
 Matrix Matrix::plus(Matrix &B){
-    if (B.getColumns() != this->getColumns() || B.getRows() != this->getRows()){
-        B = this->getAdjustedMatrix(B, this->getRows());
-    }
     auto C = Matrix(M, N);
 
     for(int i = 0;i < M;i++){
         for(int j = 0;j< N;j++){
-            C.setData(i, j, this->getValue(i,j)+ B.getValue(i, j));
+            //TODO: here i assume that B only has one row
+            C.setData(i, j, this->getValue(i,j)+ B.getValue(0, j));
         }
     }
     return C;
@@ -97,15 +95,14 @@ Matrix Matrix::getAdjustedMatrix(Matrix &B, const int n)
 
 Matrix Matrix::minus(Matrix &B){
 
-    if (B.getColumns() != this->getColumns() ||  B.getRows() != this->getColumns() ){
-        throw std::runtime_error("Illegal Matrix dimensions");
-    }
     Matrix C(M, N);
     for(int i = 0;i < M;i++){
         for(int j = 0;j< N;j++){
-            C.setData(i, j, this->data[i][j] - B.data[i][j]);
+            // TODO: here i assume that B only has one row
+            C.setData(i, j, this->data[i][j] - B.data[0][i]);
         }
     }
+
     return C;
 };
 

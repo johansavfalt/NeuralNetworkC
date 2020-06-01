@@ -9,49 +9,45 @@
 #include <vector>
 
 TEST(Training, cross_entropy_loss){
-    Matrix predictDistribution(0, 0);
-    Matrix trueDistribution(1, 1);
+    Matrix predictDistribution(4, 1);
+    Matrix trueDistribution(1, 4);
+
+    predictDistribution.setData(0, 0, 14.332);
+    predictDistribution.setData(1, 0, 13.323);
+    predictDistribution.setData(2, 0, 88.332);
+    predictDistribution.setData(3, 0, 12.113);
+
+    trueDistribution.setData(0, 0, 0.0);
+    trueDistribution.setData(0, 1, 1.0);
+    trueDistribution.setData(0, 2, 0.0);
+    trueDistribution.setData(0, 3, 1.0);
+
     Training::cross_entropy_loss(predictDistribution, trueDistribution);
+
 
 }
 
-//TEST(pointertest, testingwithpointer){
-    //std::shared_ptr<Matrix> matrixData = std::make_shared<Matrix>(1, 1);
-    //matrixData->setData(0,0,1.0);
+TEST(Training, cross_entropy_loss_derivative){
+    Matrix predictDistribution(4, 1);
+    Matrix trueDistribution(1, 4);
 
-    //std::shared_ptr<testclass> testPointer_1 = std::shared_ptr<testclass>(new testclass());
+    predictDistribution.setData(0, 0, 14.332);
+    predictDistribution.setData(1, 0, 13.323);
+    predictDistribution.setData(2, 0, 88.332);
+    predictDistribution.setData(3, 0, 12.113);
 
-    //std::shared_ptr<testclass> testPointer_2 = std::shared_ptr<testclass>(new testclass());
+    trueDistribution.setData(0, 0, 0.0);
+    trueDistribution.setData(0, 1, 1.0);
+    trueDistribution.setData(0, 2, 0.0);
+    trueDistribution.setData(0, 3, 1.0);
 
-    //std::shared_ptr<testclass> testPointer_3 = std::shared_ptr<testclass>(new testclass());
+    Matrix result = 
+        Training::compute_cross_entropy_loss(predictDistribution, trueDistribution, true);
 
-
-    //std::vector<std::shared_ptr<testclass>> layers;
-
-    //layers.push_back(testPointer_1);
-    //layers.push_back(testPointer_2);
-    //layers.push_back(testPointer_3);
-
-
-    //for(auto layer: layers){
-        //std::shared_ptr<Matrix> layerInput = matrixData;
-        //matrixData = layer->test(layerInput);
-        ////matrixData->show();
-
-    //}
+    ASSERT_EQ(result.getValue(0,0), 14.332);
+    ASSERT_EQ(result.getValue(1,0), 12.323);
+    ASSERT_EQ(result.getValue(2,0), 88.332);
+    ASSERT_EQ(result.getValue(3,0), 11.113);
 
 
-//}
-
-//TEST(Training, pointertesting){
-    //auto sharedtest = std::make_shared<Matrix>(1, 1);
-    //auto uniquetest = std::make_unique<Matrix>(1, 1);
-    //auto testclass_ptr = std::make_unique<testclass>();
-
-    //auto sharedtest = testclass_ptr->test_unique(uniquetest);
-    //sharedtest->show();
-
-//}
-//
-
-
+}

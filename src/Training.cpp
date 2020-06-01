@@ -2,6 +2,7 @@
 #include "../include/Matrix.hpp"
 #include <math.h>
 #include <list>
+#include <iostream>
 
 Matrix Training::compute_cross_entropy_loss(Matrix &data, Matrix &test, bool derivative)
 {
@@ -17,29 +18,33 @@ Matrix Training::cross_entropy_loss(Matrix &predictDistribution, Matrix &trueDis
 
     double error = 0.0;
     int M =predictDistribution.getRows();
-    std::list<double> batchResult;
+
+    std::vector<double> batchResult;
+
 
     for(int i = 0; i < M; i++){
 
-        double singleTrue = trueDistribution.getValue(i, 0);
+        double singleTrue = trueDistribution.getValue(0, i);
         double singlePred = predictDistribution.getValue(i, 0);
 
+
         if(singleTrue == 1){
-            error = log(singlePred)*-1.0;
+            error = log(singlePred) * -1.0;
         } else{
             error = log(1.0 - singlePred) * -1.0;
         }
         
-        batchResult.push_front(error);
+        batchResult.push_back(error);
     }
 
     for(auto x:batchResult){
 
         error += x;
-
     }
+
+
     double doubleValue = (1.0/M * error);
-    Matrix result(0, 0);
+    Matrix result(1, 1);
     result.fillwith(error);
     return result;
 }

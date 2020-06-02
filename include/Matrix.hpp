@@ -40,4 +40,5 @@ class Matrix
         Matrix timesConstant(double);
 };
 
+
 #endif //NeuralNetworkC_Matrix_H

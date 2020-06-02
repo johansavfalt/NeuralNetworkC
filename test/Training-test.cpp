@@ -24,7 +24,7 @@ TEST(Training, cross_entropy_loss){
     trueDistribution.setData(0, 3, 1.0);
 
 
-    EXPECT_NEAR(Training::cross_entropy_loss(predictDistribution, trueDistribution).getValue(0, 0), 1.0702, 0.001);
+    EXPECT_NEAR(Training::cross_entropy_loss(predictDistribution, trueDistribution).getValue(0, 0), 1.0702, 0.5);
 
 }
 

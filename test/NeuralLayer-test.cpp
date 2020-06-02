@@ -48,10 +48,17 @@ TEST(NeuralLayer, layer_backward_propagation){
     NeuralNetwork.push_back(NeuralLayer(4, 4, Relu()));
     NeuralNetwork.push_back(NeuralLayer(4, 1, Sigmoid()));
 
-    Matrix loss(1, 1);
-    loss.fillwith(0.777);
+    Matrix deltaLoss(1, 1);
+    deltaLoss.fillwith(0.777);
 
     for(auto it = NeuralNetwork.rbegin(); it != NeuralNetwork.rend(); ++it){
+        //it->showWeights();
+        //deltaLoss.show();
+        // TODO need to have a forwardpropagated network ready here for this to workshould think about setting up a
+        // fixture
+        Matrix layerInput = deltaLoss;
+        deltaLoss = it->layer_backward_propagation(layerInput);
+
         //it->showWeights();
         
     }

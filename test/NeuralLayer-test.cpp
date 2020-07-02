@@ -7,6 +7,64 @@
 #include <memory>
 #include <list>
 
+
+class NeuralNetworkTest : ::testing::Test
+{
+
+    protected:
+        std::vector<NeuralLayer>* NeuralNetwork;
+        Matrix* matrixData;
+        int* testInt;
+
+    virtual void SetUp(){
+
+        int i = 5;
+        testInt = &i;
+
+        NeuralNetwork = new std::vector<NeuralLayer>;
+
+        NeuralNetwork->push_back(NeuralLayer(2, 4, Relu()));
+        NeuralNetwork->push_back(NeuralLayer(4, 4, Relu()));
+        NeuralNetwork->push_back(NeuralLayer(4, 4, Relu()));
+        NeuralNetwork->push_back(NeuralLayer(4, 1, Sigmoid()));
+
+        matrixData = new Matrix(4, 2);
+
+        matrixData->setData(0, 0, 1.0);
+        matrixData->setData(0, 1, 0.0);
+
+        matrixData->setData(1, 0, 0.0);
+        matrixData->setData(1, 1, 1.0);
+
+        matrixData->setData(2, 0, 1.0);
+        matrixData->setData(2, 1, 1.0);
+
+        matrixData->setData(3, 0, 0.0);
+        matrixData->setData(3, 1, 0.0);
+
+    }
+
+    virtual void TearDown(){
+        delete NeuralNetwork;
+        delete matrixData;
+    }
+    
+};
+
+TEST(NeuralNetworkTest, layerTest){
+    //std::cout << *testInt << std::endl;
+    //NeuralNetwork->push_back(NeuralLayer(1,1,Sigmoid()));
+
+
+    //for(auto layer : *NeuralNetwork){
+
+        //auto layerInput = *matrixData;
+        //matrixData = layer.layer_forward_propagation(layerInput);
+    //}
+
+
+}
+
 TEST(NeuralLayer, layer_forward_propagation){
 
     std::vector<NeuralLayer> NeuralNetwork;

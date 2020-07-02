@@ -57,6 +57,5 @@ Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)
             this->Activation_prev);
     this->deltaCurr1 = this->deltaCurr.hadamanproduct(activationDelta);
     return this->deltaCurr1;
-    //return Matrix(1, 1);
 
 };

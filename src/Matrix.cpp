@@ -52,7 +52,7 @@ Matrix Matrix::random(unsigned M, unsigned N)
 
 Matrix Matrix::transpose()
 {
-    Matrix A(M, N);
+    Matrix A(N, M);
     for(unsigned i = 0; i < M; i++){
         for(unsigned j = 0; j < N; j++){
             A.setData(j, i, this->getValue(i,j));

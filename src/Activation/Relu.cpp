@@ -22,6 +22,7 @@ Matrix Relu::activation_derivative(Matrix &Z_Matrix) const
 
 Matrix Relu::applyforAllElements(Matrix &Z_Matrix,double (*activationtype)(double)) const
 {
+
     int m = Z_Matrix.getRows();
     int n = Z_Matrix.getColumns();
 

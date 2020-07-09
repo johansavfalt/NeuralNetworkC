@@ -32,7 +32,6 @@ void NeuralLayer::showWeights(){
 
 Matrix NeuralLayer::layer_forward_propagation(Matrix &activation_prev)
 {
-
     this->Activation_prev = activation_prev;
     this->Z_curr = this->Activation_prev.product(this->weights).plus(this->bias);
     this->Activation_curr = this->activation.activation(this->Z_curr);
@@ -41,10 +40,6 @@ Matrix NeuralLayer::layer_forward_propagation(Matrix &activation_prev)
 
 Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)
 {
-    this->Activation_prev.show();
-    this->Activation_prev.transpose().show();
-    delta_Aprev.show();
-
     this->deltaWeights = this->Activation_prev.transpose().product(delta_Aprev);
     double sum = 0.0;
     for(int i = 0; i < delta_Aprev.getColumns(); i++){

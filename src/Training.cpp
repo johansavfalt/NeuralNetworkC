@@ -1,22 +1,36 @@
-#include "../include/Training.hpp"
-#include "../include/Matrix.hpp"
+#include "Training.hpp"
+#include "Matrix.hpp"
+#include "NeuralLayer.hpp"
+#include "Data.hpp"
 #include <math.h>
 #include <list>
 #include <iostream>
 #include <vector>
 
+//Training::Training(std::vector<NeuralLayer> NeuralNetwork, double learningRate, int epochs,
+                //Data DataSet, int printResult){
+
+    //this->DataSet = DataSet;
+    //this->NeuralNetwork = NeuralNetwork;
+    //this->learningRate = learningRate;
+    //this->epochs = epochs;
+
+
+//}
 void Training::train()
 {
 
     for (int i = 0; i< this->epochs ; i++ ) {
         //this.trainingData.shuffle();
+        std::vector<Matrix> trainingData = this->DataSet.getTrainingData();
+        Matrix forwardpass = this->forwardPropagation(trainingData);
         //Matrix forwardpass = this->forwardPropagation(this->DataSet.getTestData());
         //Matrix forwardpass = this->forwardPropagation(this->DataSet.getTestData());
     }
     
 }
 
-Matrix Training::forwardPropagation(Data data)
+Matrix Training::forwardPropagation(std::vector<Matrix> &)
 {
     for(auto & layer : this->NeuralNetwork){
 

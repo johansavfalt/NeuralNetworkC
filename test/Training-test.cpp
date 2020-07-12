@@ -8,6 +8,10 @@
 #include <vector>
 #include <math.h>
 
+TEST(Training, traing){
+
+}
+
 
 TEST(Training, cross_entropy_loss){
     Matrix predictDistribution(4, 1);

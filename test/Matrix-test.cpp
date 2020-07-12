@@ -170,6 +170,3 @@ TEST(MatrixTest, timesConstant){
         }
     }
 }
-    
- 
-// TODO : add more test

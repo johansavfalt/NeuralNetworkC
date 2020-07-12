@@ -12,10 +12,12 @@ class Training
     private:
         int printResult;
         int epochs;
+        int learningRate;
         Data DataSet;
         std::vector<NeuralLayer> NeuralNetwork;
 
     public:
+        //TODO should accept NeuralNetwork class as first parameter
         Training(std::vector<NeuralLayer>, double learningRate, int epochs,
                 Data  DataSet, int printResult);
 
@@ -27,7 +29,7 @@ class Training
 
         void train();
 
-        Matrix forwardPropagation(Data data);
+        Matrix forwardPropagation(std::vector<Matrix> &);
 
 
 };

@@ -10,6 +10,7 @@ class Data
         std::vector<Matrix> trainingSet;
         std::vector<Matrix> testSet;
     public:
+        Data();
         Data(std::vector<Matrix>, std::vector<Matrix>);
         std::vector<Matrix> getTrainingData();
         std::vector<Matrix> getTestData();

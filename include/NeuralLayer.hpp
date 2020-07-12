@@ -13,6 +13,7 @@ class NeuralLayer
         Matrix layer_forward_propagation(Matrix &);
         Matrix layer_backward_propagation(Matrix &);
         void updateParameters(double);
+        void momentum(double);
         void showWeights();
 
     private:

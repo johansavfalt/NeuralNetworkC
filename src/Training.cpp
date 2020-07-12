@@ -3,6 +3,27 @@
 #include <math.h>
 #include <list>
 #include <iostream>
+#include <vector>
+
+void Training::train()
+{
+
+    for (int i = 0; i< this->epochs ; i++ ) {
+        //this.trainingData.shuffle();
+        //Matrix forwardpass = this->forwardPropagation(this->DataSet.getTestData());
+        //Matrix forwardpass = this->forwardPropagation(this->DataSet.getTestData());
+    }
+    
+}
+
+Matrix Training::forwardPropagation(Data data)
+{
+    for(auto & layer : this->NeuralNetwork){
+
+    } 
+    Matrix test(1,1);
+    return test;
+};
 
 Matrix Training::compute_cross_entropy_loss(Matrix &data, Matrix &test, bool derivative)
 {

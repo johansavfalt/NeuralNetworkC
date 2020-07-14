@@ -12,13 +12,12 @@ class Training
     private:
         int printResult;
         int epochs;
-        int learningRate;
-        Matrix deltaLoss;
+        double learningRate;
+
         Data DataSet;
         NeuralNetwork NeuralLayers;
 
     public:
-        //TODO should accept NeuralNetwork class as first parameter
         Training(NeuralNetwork NeuralLayers, double learningRate, int epochs,
                 Data  DataSet, int printResult);
 
@@ -29,8 +28,11 @@ class Training
                 Matrix &predictDistribution, Matrix &trueDistribution);
 
         void train();
+        void updateParameters();
 
         Matrix forwardPropagation(Matrix &);
+        Matrix backwardPropagation(Matrix &);
+
 
 
 };

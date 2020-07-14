@@ -7,16 +7,17 @@
 #include <iostream>
 #include <vector>
 
-//Training::Training(std::vector<NeuralLayer> NeuralNetwork, double learningRate, int epochs,
-                //Data DataSet, int printResult){
+Training::Training(NeuralNetwork NeuralLayers, double learningRate, int epochs,
+                Data DataSet, int printResult){
 
-    //this->DataSet = DataSet;
-    //this->NeuralNetwork = NeuralNetwork;
-    //this->learningRate = learningRate;
-    //this->epochs = epochs;
+    this->DataSet = DataSet;
+    this->NeuralLayers = NeuralLayers;
+    this->learningRate = learningRate;
+    this->epochs = epochs;
 
 
-//}
+}
+
 void Training::train()
 {
 
@@ -29,9 +30,9 @@ void Training::train()
 
         Matrix forwardpass = this->forwardPropagation(trainingData);
         Matrix deltaLoss = this->compute_cross_entropy_loss(forwardpass, testData , true);
-        //TODO: implements this
-        //this->backwardPropagation(deltaLoss);
-        //this->updateParameters;
+
+        this->backwardPropagation(deltaLoss);
+        this->updateParameters();
     }
     
 }
@@ -40,12 +41,31 @@ Matrix Training::forwardPropagation(Matrix &data)
 {
     for(auto & layer : this->NeuralLayers.getNeuralNetwork()){
         Matrix layerInput = data;
-        layer.layer_forward_propagation(layerInput);
+        data = layer->layer_forward_propagation(layerInput);
 
     } 
-    Matrix test(1,1);
-    return test;
+    return data;
 };
+
+Matrix Training::backwardPropagation(Matrix &deltaLoss){
+
+    std::vector<NeuralLayer *> nL = this->NeuralLayers.getNeuralNetwork();
+
+    for(auto it = nL.rbegin(); it != nL.rend(); ++it){
+        Matrix layerInput = deltaLoss;
+        deltaLoss = (*it)->layer_backward_propagation(layerInput);
+        
+    };
+
+    return deltaLoss;
+
+
+}
+
+void Training::updateParameters(){
+    for(auto & layer: this->NeuralLayers.getNeuralNetwork())
+        layer->updateParameters(this->learningRate);
+}
 
 Matrix Training::compute_cross_entropy_loss(Matrix &data, Matrix &test, bool derivative)
 {

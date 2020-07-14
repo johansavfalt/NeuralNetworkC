@@ -12,8 +12,9 @@ class NeuralLayer
         NeuralLayer(unsigned int , unsigned int , const ActivationFunction &);
         Matrix layer_forward_propagation(Matrix &);
         Matrix layer_backward_propagation(Matrix &);
-        void updateParameters(double);
+
         void momentum(double);
+        void updateParameters(double &);
         void showWeights();
 
     private:

@@ -1,14 +1,24 @@
 #include "../lib/googletest/googletest/include/gtest/gtest.h"
-#include "../include/Training.hpp"
-#include "../include/Matrix.hpp"
-#include "../include/Activation/Relu.hpp"
+#include "Training.hpp"
+#include "Matrix.hpp"
+#include "Activation/Relu.hpp"
+#include "Data.hpp"
 
 #include <memory>
 #include <iostream>
 #include <vector>
 #include <math.h>
 
-TEST(Training, traing){
+TEST(Training, train){
+    NeuralNetwork neuralNetwork;
+    Data DataSet;
+
+    double learningRate = 0.0001;
+    int epochs = 100;
+    int printResult = 0;
+
+    Training training(neuralNetwork, learningRate, epochs, DataSet, printResult );
+    training.train();
 
 }
 

@@ -8,6 +8,8 @@ Data::Data(std::vector<Matrix> trainingSet, std::vector<Matrix> testSet)
     this->testSet = testSet;
 };
 
+Data::Data(){};
+
 Matrix Data::getTrainingData()
 {
     return this->nextRandomTrainingSet;

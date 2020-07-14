@@ -2,7 +2,10 @@
 #define NeuralNetworkC_NeuralNetwork_H
 
 #include "NeuralLayer.hpp"
+#include <functional>
 #include <string>
+#include <memory>
+#include <list>
 
 class NeuralNetwork
 {
@@ -14,13 +17,16 @@ class NeuralNetwork
 
         std::string activationStart;
         std::string activationEnd;
-        std::vector<NeuralLayer> LayerVector;
+        //std::vector<std::unique_ptr<NeuralLayer>> LayerVector;
+        std::vector<NeuralLayer*> LayerVector;
 
     public:
         NeuralNetwork(int,int,int,int, std::string, std::string);
         NeuralNetwork();
+        ~NeuralNetwork();
         void init();
-        std::vector<NeuralLayer> getNeuralNetwork();
+        //std::vector<std::unique_ptr<NeuralLayer>> getNeuralNetwork();
+        std::vector<NeuralLayer*> getNeuralNetwork();
 
 };
 

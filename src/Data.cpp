@@ -1,5 +1,6 @@
 #include "Data.hpp"
 #include "Matrix.hpp"
+#include <cstdlib>
 
 Data::Data(std::vector<Matrix> trainingSet, std::vector<Matrix> testSet)
 {
@@ -7,12 +8,19 @@ Data::Data(std::vector<Matrix> trainingSet, std::vector<Matrix> testSet)
     this->testSet = testSet;
 };
 
-std::vector<Matrix> Data::getTrainingData()
+Matrix Data::getTrainingData()
 {
-    return this->trainingSet;
+    return this->nextRandomTrainingSet;
 }
 
-std::vector<Matrix> Data::getTestData()
+Matrix Data::getTestData()
 {
-    return this->testSet;
+    return this->nextRandomTestSet;
+}
+
+void Data::shuffle(){
+    // generates random int between 0 and maxsize of trainingSet
+    int randomInt = rand() % this->trainingSet.max_size();
+    this->nextRandomTrainingSet = this->trainingSet.at(randomInt);
+    this->nextRandomTestSet = this->testSet.at(randomInt);
 }

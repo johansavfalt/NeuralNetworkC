@@ -9,11 +9,16 @@ class Data
     private:
         std::vector<Matrix> trainingSet;
         std::vector<Matrix> testSet;
+
+        Matrix nextRandomTrainingSet;
+        Matrix nextRandomTestSet;
+
     public:
         Data();
         Data(std::vector<Matrix>, std::vector<Matrix>);
-        std::vector<Matrix> getTrainingData();
-        std::vector<Matrix> getTestData();
+        void shuffle();
+        Matrix getTrainingData();
+        Matrix getTestData();
 
 };
 #endif //NeuralNetworkC_Data_H

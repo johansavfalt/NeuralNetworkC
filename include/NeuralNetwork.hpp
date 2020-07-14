@@ -18,6 +18,7 @@ class NeuralNetwork
 
     public:
         NeuralNetwork(int,int,int,int, std::string, std::string);
+        NeuralNetwork();
         void init();
         std::vector<NeuralLayer> getNeuralNetwork();
 

@@ -21,18 +21,26 @@ void Training::train()
 {
 
     for (int i = 0; i< this->epochs ; i++ ) {
-        //this.trainingData.shuffle();
-        std::vector<Matrix> trainingData = this->DataSet.getTrainingData();
+
+        this->DataSet.shuffle();
+
+        Matrix trainingData = this->DataSet.getTrainingData();
+        Matrix testData = this->DataSet.getTestData();
+
         Matrix forwardpass = this->forwardPropagation(trainingData);
-        //Matrix forwardpass = this->forwardPropagation(this->DataSet.getTestData());
-        //Matrix forwardpass = this->forwardPropagation(this->DataSet.getTestData());
+        Matrix deltaLoss = this->compute_cross_entropy_loss(forwardpass, testData , true);
+        //TODO: implements this
+        //this->backwardPropagation(deltaLoss);
+        //this->updateParameters;
     }
     
 }
 
-Matrix Training::forwardPropagation(std::vector<Matrix> &)
+Matrix Training::forwardPropagation(Matrix &data)
 {
-    for(auto & layer : this->NeuralNetwork){
+    for(auto & layer : this->NeuralLayers.getNeuralNetwork()){
+        Matrix layerInput = data;
+        layer.layer_forward_propagation(layerInput);
 
     } 
     Matrix test(1,1);

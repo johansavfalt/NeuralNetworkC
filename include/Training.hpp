@@ -1,7 +1,7 @@
 #ifndef NeuralNetworkC_Training_H
 #define NeuralNetworkC_Training_H
 
-#include "NeuralLayer.hpp"
+#include "NeuralNetwork.hpp"
 #include "Matrix.hpp"
 #include "Data.hpp"
 #include <vector>
@@ -13,12 +13,13 @@ class Training
         int printResult;
         int epochs;
         int learningRate;
+        Matrix deltaLoss;
         Data DataSet;
-        std::vector<NeuralLayer> NeuralNetwork;
+        NeuralNetwork NeuralLayers;
 
     public:
         //TODO should accept NeuralNetwork class as first parameter
-        Training(std::vector<NeuralLayer>, double learningRate, int epochs,
+        Training(NeuralNetwork NeuralLayers, double learningRate, int epochs,
                 Data  DataSet, int printResult);
 
         static Matrix compute_cross_entropy_loss(
@@ -29,7 +30,7 @@ class Training
 
         void train();
 
-        Matrix forwardPropagation(std::vector<Matrix> &);
+        Matrix forwardPropagation(Matrix &);
 
 
 };

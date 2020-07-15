@@ -7,15 +7,16 @@
 class Data
 {
     private:
-        std::vector<Matrix> trainingSet;
-        std::vector<Matrix> testSet;
+        Matrix trainingSet;
+        Matrix testSet;
 
         Matrix nextRandomTrainingSet;
         Matrix nextRandomTestSet;
 
     public:
         Data();
-        Data(std::vector<Matrix>, std::vector<Matrix>);
+        Data(Matrix, Matrix);
+        void init();
         void shuffle();
         Matrix getTrainingData();
         Matrix getTestData();

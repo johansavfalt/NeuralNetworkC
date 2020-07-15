@@ -2,6 +2,7 @@
 #include "Matrix.hpp"
 #include "NeuralLayer.hpp"
 #include "Data.hpp"
+#include <cstdio>
 #include <math.h>
 #include <list>
 #include <iostream>

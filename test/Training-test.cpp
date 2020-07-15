@@ -4,23 +4,24 @@
 #include "Activation/Relu.hpp"
 #include "Data.hpp"
 
+#include <cstdio>
 #include <memory>
 #include <iostream>
 #include <vector>
 #include <math.h>
 
-TEST(Training, train){
-    NeuralNetwork neuralNetwork;
-    Data DataSet;
+//TEST(Training, train){
+    //NeuralNetwork neuralNetwork;
+    //Data DataSet;
 
-    double learningRate = 0.0001;
-    int epochs = 100;
-    int printResult = 0;
+    //double learningRate = 0.0001;
+    //int epochs = 100;
+    //int printResult = 0;
 
-    Training training(neuralNetwork, learningRate, epochs, DataSet, printResult );
-    training.train();
+    //Training training(neuralNetwork, learningRate, epochs, DataSet, printResult );
+    //training.train();
 
-}
+//}
 
 
 TEST(Training, cross_entropy_loss){

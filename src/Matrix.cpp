@@ -171,6 +171,19 @@ Matrix Matrix::timesConstant(double constant) {
         return C;
     }
 
+Matrix Matrix::getRowAsNewMatrix(int rowNumber){
+
+    //this matrix must be square
+    Matrix resultMatrix(1, this->getColumns());
+    int i = 0;
+    std::vector<double> matrixRow = this->getData().at(rowNumber);
+    for(auto & matrixColumnValue: matrixRow){
+        resultMatrix.setData(0, i, matrixColumnValue);
+        i++;
+    }
+    return resultMatrix;
+
+}
 
 void Matrix::show() {
         std::cout << "M: " + std::to_string(this->M) + " N:"+std::to_string(this->N) << std::endl;

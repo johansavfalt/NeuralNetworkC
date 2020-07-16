@@ -38,6 +38,7 @@ class Matrix
         Matrix hadamanproduct(Matrix &);
         Matrix product(Matrix &);
         Matrix timesConstant(double);
+        Matrix getRowAsNewMatrix(int);
 };
 
 

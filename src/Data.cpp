@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <time.h>
 
 Data::Data(Matrix trainingSet, Matrix testSet)
 {
@@ -11,15 +12,6 @@ Data::Data(Matrix trainingSet, Matrix testSet)
 };
 
 void Data::init(){
-    this->nextRandomTestSet = Matrix(1, this->testSet.getColumns());
-    this->nextRandomTrainingSet = Matrix(1, this->trainingSet.getColumns());
-
-    for(auto matrixRow: this->trainingSet.getData()){
-        //fillup matrix with the trainingset Data
-        //TODO or i just choose a rendom row of the matrixes and create a matrix of the row?
-
-    };
-
 
 };
 
@@ -37,11 +29,10 @@ Matrix Data::getTestData()
 
 void Data::shuffle(){
     // generates random int between 0 and maxsize of trainingSet
-    int randomInt = rand() % this->trainingSet.getRows();
-    //something wrong on this next line
-    //std::cout << randomInt << std::endl;
-    //std::cout << this->trainingSet.getRows() << std::endl;
+    srand(time(0));//seed based on current time
+    int randomInt = rand() % this->trainingSet.getRows(); //index based
 
-    //this->nextRandomTrainingSet = this->trainingSet.at(randomInt);
-    //this->nextRandomTestSet = this->testSet.at(randomInt);
+    this->nextRandomTrainingSet = this->trainingSet.getRowAsNewMatrix(randomInt);
+    this->nextRandomTestSet = this->testSet.getRowAsNewMatrix(randomInt);
+
 }

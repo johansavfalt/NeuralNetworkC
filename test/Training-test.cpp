@@ -10,18 +10,40 @@
 #include <vector>
 #include <math.h>
 
-//TEST(Training, train){
-    //NeuralNetwork neuralNetwork;
-    //Data DataSet;
+TEST(Training, train){
+    Matrix testSetSet(4, 1);
+    Matrix trainingData(4, 2);
 
-    //double learningRate = 0.0001;
-    //int epochs = 100;
-    //int printResult = 0;
+    trainingData.setData(0, 0, 1.0);
+    trainingData.setData(0, 1, 0.0);
 
-    //Training training(neuralNetwork, learningRate, epochs, DataSet, printResult );
-    //training.train();
+    trainingData.setData(1, 0, 0.0);
+    trainingData.setData(1, 1, 1.0);
 
-//}
+    trainingData.setData(2, 0, 1.0);
+    trainingData.setData(2, 1, 1.0);
+
+    trainingData.setData(3, 0, 0.0);
+    trainingData.setData(3, 1, 0.0);
+
+    testSetSet.setData(0, 0, 1.0);
+    testSetSet.setData(1, 0, 1.0);
+    testSetSet.setData(2, 0, 0.0);
+    testSetSet.setData(3, 0, 0.0);
+
+    Data DataSet(trainingData, testSetSet);
+ 
+    NeuralNetwork neuralNetwork;
+    //neuralNetwork.init();// TODO this init() causes trouble in train() probably beacuse of the pointers
+
+    double learningRate = 0.01;
+    int epochs = 5;
+    int printResult = 0;
+
+    Training training(neuralNetwork, learningRate, epochs, DataSet, printResult );
+    training.train();
+
+}
 
 
 TEST(Training, cross_entropy_loss){

@@ -29,26 +29,35 @@ void Training::train()
         Matrix trainingData = this->DataSet.getTrainingData();
         Matrix testData = this->DataSet.getTestData();
 
+
         Matrix forwardpass = this->forwardPropagation(trainingData);
         Matrix deltaLoss = this->compute_cross_entropy_loss(forwardpass, testData , true);
 
         this->backwardPropagation(deltaLoss);
         this->updateParameters();
+
+        //if(i % 1000 == 0){
+            ////why is this showing wrong?
+            //forwardpass.show();
+            //testData.show();
+            //std::cout << "///////////////////////" << std::endl;
+        //}
     }
     
 }
 
-Matrix Training::forwardPropagation(Matrix &data)
+Matrix Training::forwardPropagation(Matrix data)
 {
-    for(auto & layer : this->NeuralLayers.getNeuralNetwork()){
+    for(auto * layer : this->NeuralLayers.getNeuralNetwork()){
         Matrix layerInput = data;
         data = layer->layer_forward_propagation(layerInput);
+        data.show();
 
     } 
     return data;
 };
 
-Matrix Training::backwardPropagation(Matrix &deltaLoss){
+Matrix Training::backwardPropagation(Matrix deltaLoss){
 
     std::vector<NeuralLayer *> nL = this->NeuralLayers.getNeuralNetwork();
 

@@ -30,8 +30,8 @@ class Training
         void train();
         void updateParameters();
 
-        Matrix forwardPropagation(Matrix &);
-        Matrix backwardPropagation(Matrix &);
+        Matrix forwardPropagation(Matrix);
+        Matrix backwardPropagation(Matrix);
 
 
 

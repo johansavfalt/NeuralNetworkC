@@ -8,18 +8,17 @@
 #include <iostream>
 #include <vector>
 
-Training::Training(NeuralNetwork NeuralLayers, double learningRate, int epochs,
+Training::Training(double learningRate, int epochs,
                 Data DataSet, int printResult){
 
     this->DataSet = DataSet;
-    this->NeuralLayers = NeuralLayers;
     this->learningRate = learningRate;
     this->epochs = epochs;
 
 
 }
 
-void Training::train()
+void Training::train(std::vector<NeuralLayer> & neuralNetwork)
 {
 
     for (int i = 0; i< this->epochs ; i++ ) {
@@ -30,40 +29,35 @@ void Training::train()
         Matrix testData = this->DataSet.getTestData();
 
 
-        Matrix forwardpass = this->forwardPropagation(trainingData);
+        Matrix forwardpass = this->forwardPropagation(neuralNetwork, trainingData);
         Matrix deltaLoss = this->compute_cross_entropy_loss(forwardpass, testData , true);
 
-        this->backwardPropagation(deltaLoss);
-        this->updateParameters();
+        this->backwardPropagation(neuralNetwork, deltaLoss);
+        this->updateParameters(neuralNetwork);
 
-        //if(i % 1000 == 0){
-            ////why is this showing wrong?
-            //forwardpass.show();
-            //testData.show();
-            //std::cout << "///////////////////////" << std::endl;
-        //}
+        if(i % 5 == 0){
+            deltaLoss.show(); // TODO it seams to work!!!!
+            std::cout << "///////////////////////" << std::endl;
+        }
     }
     
 }
 
-Matrix Training::forwardPropagation(Matrix data)
+Matrix Training::forwardPropagation(std::vector<NeuralLayer> & NeuralNetwork, Matrix data)
 {
-    for(auto * layer : this->NeuralLayers.getNeuralNetwork()){
+    for(auto & layer : NeuralNetwork){
         Matrix layerInput = data;
-        data = layer->layer_forward_propagation(layerInput);
-        data.show();
+        data = layer.layer_forward_propagation(layerInput);
 
     } 
     return data;
 };
 
-Matrix Training::backwardPropagation(Matrix deltaLoss){
-
-    std::vector<NeuralLayer *> nL = this->NeuralLayers.getNeuralNetwork();
+Matrix Training::backwardPropagation(std::vector<NeuralLayer> & nL, Matrix deltaLoss){
 
     for(auto it = nL.rbegin(); it != nL.rend(); ++it){
         Matrix layerInput = deltaLoss;
-        deltaLoss = (*it)->layer_backward_propagation(layerInput);
+        deltaLoss = it->layer_backward_propagation(layerInput);
         
     };
 
@@ -72,9 +66,9 @@ Matrix Training::backwardPropagation(Matrix deltaLoss){
 
 }
 
-void Training::updateParameters(){
-    for(auto & layer: this->NeuralLayers.getNeuralNetwork())
-        layer->updateParameters(this->learningRate);
+void Training::updateParameters(std::vector<NeuralLayer> & neuralNetwork){
+    for(auto & layer: neuralNetwork)
+        layer.updateParameters(this->learningRate);
 }
 
 Matrix Training::compute_cross_entropy_loss(Matrix &data, Matrix &test, bool derivative)

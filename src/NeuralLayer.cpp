@@ -54,21 +54,11 @@ Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)
     return this->deltaCurr1;
 
 };
-void NeuralLayer::momentum(double beta){
-
-    Matrix momentumMatrix = this->deltaWeights.timesConstant(1.0-beta);
-
-    this->weights_momentum = this->weights_momentum.timesConstant(beta).plus(momentumMatrix);
-    this->bias_momentum = this->bias_momentum.timesConstant(beta).plus(momentumMatrix);
-}
 
 void NeuralLayer::updateParameters(double &learningRate){
+    Matrix newDelta = this->deltaWeights.timesConstant(-learningRate);
+    Matrix newBias = this->deltaBias.timesConstant(-learningRate);
 
-    this->momentum(0.8);
-
-    Matrix momentumMatrix = this->weights_momentum.timesConstant(-learningRate);
-    Matrix biasMatrix = this->bias_momentum.timesConstant(-learningRate);
-
-    this->weights = this->weights.product(momentumMatrix);
-    this->bias = this->bias.product(biasMatrix);
+    this->weights = this->weights.plus(newDelta);
+    this->bias = this->bias.plus(newBias);
 }

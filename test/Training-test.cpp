@@ -2,6 +2,7 @@
 #include "Training.hpp"
 #include "Matrix.hpp"
 #include "Activation/Relu.hpp"
+#include "Activation/Sigmoid.hpp"
 #include "Data.hpp"
 
 #include <cstdio>
@@ -33,15 +34,19 @@ TEST(Training, train){
 
     Data DataSet(trainingData, testSetSet);
  
-    NeuralNetwork neuralNetwork;
-    //neuralNetwork.init();// TODO this init() causes trouble in train() probably beacuse of the pointers
+    std::vector<NeuralLayer> neuralNetwork;
+
+    neuralNetwork.push_back(NeuralLayer(2, 4, Relu()));
+    neuralNetwork.push_back(NeuralLayer(4, 4, Relu()));
+    neuralNetwork.push_back(NeuralLayer(4, 4, Relu()));
+    neuralNetwork.push_back(NeuralLayer(4, 1, Sigmoid()));
 
     double learningRate = 0.01;
-    int epochs = 5;
+    int epochs = 50;
     int printResult = 0;
 
-    Training training(neuralNetwork, learningRate, epochs, DataSet, printResult );
-    training.train();
+    Training training(learningRate, epochs, DataSet, printResult);
+    training.train(neuralNetwork);
 
 }
 

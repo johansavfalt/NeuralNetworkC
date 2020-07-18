@@ -15,10 +15,9 @@ class Training
         double learningRate;
 
         Data DataSet;
-        NeuralNetwork NeuralLayers;
 
     public:
-        Training(NeuralNetwork NeuralLayers, double learningRate, int epochs,
+        Training(double learningRate, int epochs,
                 Data  DataSet, int printResult);
 
         static Matrix compute_cross_entropy_loss(
@@ -27,11 +26,11 @@ class Training
         static Matrix cross_entropy_loss(
                 Matrix &predictDistribution, Matrix &trueDistribution);
 
-        void train();
-        void updateParameters();
+        void train(std::vector<NeuralLayer> &);
+        void updateParameters(std::vector<NeuralLayer> &);
 
-        Matrix forwardPropagation(Matrix);
-        Matrix backwardPropagation(Matrix);
+        Matrix forwardPropagation(std::vector<NeuralLayer> &, Matrix data);
+        Matrix backwardPropagation(std::vector<NeuralLayer> &, Matrix data);
 
 
 

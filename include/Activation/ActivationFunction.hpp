@@ -1,7 +1,7 @@
 #ifndef NeuralNetworkC_ActivationFunction_H
 #define NeuralNetworkC_ActivationFunction_H
 
-#include "../Matrix.hpp"
+#include "Matrix.hpp"
 
 class ActivationFunction
 {

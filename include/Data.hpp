@@ -16,7 +16,6 @@ class Data
     public:
         Data();
         Data(Matrix, Matrix);
-        void init();
         void shuffle();
         Matrix getTrainingData();
         Matrix getTestData();

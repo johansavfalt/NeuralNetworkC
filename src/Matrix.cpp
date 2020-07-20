@@ -3,6 +3,11 @@
 #include <iostream>
 #include <memory>
 
+// Matrix class
+// Create a "Matrix" based ond a two dimensional vector (two nested std::vectors)
+// alot of the basic matrix operations exists and most of them generates and returns
+// a new Matrix instance 
+//
 Matrix::Matrix(){};
 
 Matrix::Matrix(unsigned M, unsigned N)

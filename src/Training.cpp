@@ -8,6 +8,9 @@
 #include <iostream>
 #include <vector>
 
+// Training class
+// creates a trainingClass with hyperparametes, data and a NeuralNetwork and the training 
+// of the network forwardPropagation, backwardPropagation and loss calculation
 Training::Training(double learningRate, int epochs,
                 Data DataSet, int printResult){
 
@@ -17,7 +20,10 @@ Training::Training(double learningRate, int epochs,
 
 
 }
-
+// This method trains the NeuralNetwork given the hyoperparameters
+// performex, forwardPropagation -> loss calculation -> backwardPropagation and
+// prints the loss at given intervals
+//
 void Training::train(std::vector<NeuralLayer> & neuralNetwork)
 {
 
@@ -36,13 +42,17 @@ void Training::train(std::vector<NeuralLayer> & neuralNetwork)
         this->updateParameters(neuralNetwork);
 
         if(i % 5 == 0){
-            deltaLoss.show(); // TODO it seams to work!!!!
             std::cout << "///////////////////////" << std::endl;
+            std::cout << "epoch : "; 
+            std::cout << i << std::endl;
+            std::cout << "loss : "<< std::endl; 
+            deltaLoss.show();
         }
     }
     
 }
 
+// forwardPropagation on the layers of the network
 Matrix Training::forwardPropagation(std::vector<NeuralLayer> & NeuralNetwork, Matrix data)
 {
     for(auto & layer : NeuralNetwork){
@@ -52,7 +62,7 @@ Matrix Training::forwardPropagation(std::vector<NeuralLayer> & NeuralNetwork, Ma
     } 
     return data;
 };
-
+// backwardPropagation on the layers of the network
 Matrix Training::backwardPropagation(std::vector<NeuralLayer> & nL, Matrix deltaLoss){
 
     for(auto it = nL.rbegin(); it != nL.rend(); ++it){
@@ -65,22 +75,22 @@ Matrix Training::backwardPropagation(std::vector<NeuralLayer> & nL, Matrix delta
 
 
 }
-
+//updates the layers of the network 
 void Training::updateParameters(std::vector<NeuralLayer> & neuralNetwork){
     for(auto & layer: neuralNetwork)
         layer.updateParameters(this->learningRate);
 }
-
+// computes either cross_entropy_loss or derivative of the cross_entropy_loss
 Matrix Training::compute_cross_entropy_loss(Matrix &data, Matrix &test, bool derivative)
 {
     if(derivative){
-        return data.minus(test);
+        return data.minus(test); // derivative of cross_entropy_loss is just the delta of the pred vs real
     } else{
         return cross_entropy_loss(data, test);
     }
 
 }
-
+// computes compute_cross_entropy_loss
 Matrix Training::cross_entropy_loss(Matrix &predictDistribution, Matrix &trueDistribution){
 
     double endError;

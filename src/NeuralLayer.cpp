@@ -1,7 +1,13 @@
-#include "../include/NeuralLayer.hpp"
-#include "../include/Matrix.hpp"
+#include "NeuralLayer.hpp"
+#include "Matrix.hpp"
 #include "Activation/ActivationFunction.hpp"
 #include <iostream>
+
+// NeuralLayer class
+// Creates a "NeuralLayer" which consist of Matrices and operations on them
+// Neurallayers instances together create a network of layers (NeuralNetwork)
+// Example:
+//  NeuralLayer NeuralLayer1(2, 4, Relu());
 
 NeuralLayer::NeuralLayer(unsigned int inputs, unsigned int units,
         const ActivationFunction &activation):
@@ -25,11 +31,9 @@ NeuralLayer::NeuralLayer(unsigned int inputs, unsigned int units,
 
 };
 
-void NeuralLayer::showWeights(){
-    this->weights.show();
-};
-
-
+// layer_forward_propagation
+// performec layer_forward_propagation on the weights and biases matrices of
+//
 Matrix NeuralLayer::layer_forward_propagation(Matrix &activation_prev)
 {
     this->Activation_prev = activation_prev;
@@ -38,6 +42,9 @@ Matrix NeuralLayer::layer_forward_propagation(Matrix &activation_prev)
     return this->Activation_curr;
 };
 
+// layer backward propagation
+// performex layer_backward_propagation on the weights and biases matrixed of 
+// the layer 
 Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)
 {
     this->deltaWeights = this->Activation_prev.transpose().product(delta_Aprev);
@@ -55,6 +62,7 @@ Matrix NeuralLayer::layer_backward_propagation(Matrix &delta_Aprev)
 
 };
 
+// updates the weight and bias matrices with the calculated delta ,times the learningRate
 void NeuralLayer::updateParameters(double &learningRate){
     Matrix newDelta = this->deltaWeights.timesConstant(-learningRate);
     Matrix newBias = this->deltaBias.timesConstant(-learningRate);

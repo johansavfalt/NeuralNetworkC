@@ -1,10 +1,10 @@
 #ifndef NeuralNetworkC_Training_H
 #define NeuralNetworkC_Training_H
 
-#include "NeuralNetwork.hpp"
 #include "Matrix.hpp"
 #include "Data.hpp"
 #include <vector>
+#include "NeuralLayer.hpp"
 
 class Training
 {

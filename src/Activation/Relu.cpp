@@ -1,11 +1,16 @@
-#include "../../include/Activation/ActivationFunction.hpp"
-#include "../../include/Activation/Relu.hpp"
-#include "../../include/Matrix.hpp"
+#include "Activation/ActivationFunction.hpp"
+#include "Activation/Relu.hpp"
+#include "Matrix.hpp"
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
+// Relu class
+// Creates activationfunction for relu
+// Example:
+//  Matrix testMatrix(1,1);
+//  this->activation.activation(testMatrix)
 
 Matrix Relu::activation(Matrix &Z_Matrix) const
 {
@@ -20,6 +25,12 @@ Matrix Relu::activation_derivative(Matrix &Z_Matrix) const
 
 };
 
+// applies the activationfunction (Relu) for every element in the matrix
+// takes the activationfunction (dervivative version or normal version ) as a parameter
+//  Example :
+//      Matrix testMatrix(1,1)
+//      applyforAllElements(testMatrix, Relu::activate)
+//
 Matrix Relu::applyforAllElements(Matrix &Z_Matrix,double (*activationtype)(double)) const
 {
 
@@ -40,11 +51,13 @@ Matrix Relu::applyforAllElements(Matrix &Z_Matrix,double (*activationtype)(doubl
 
 };
 
+// Relu Activation function
 double Relu::activate(double x)
 {
     return std::max(x, 0.0);
 }
 
+// Relu activation derivative
 double Relu::activate_derivative(double x)
 {
     if(x > 0.0){

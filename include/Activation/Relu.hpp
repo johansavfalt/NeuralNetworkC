@@ -2,7 +2,7 @@
 #define NeuralNetworkC_Relu_H
 
 #include "ActivationFunction.hpp"
-#include "../Matrix.hpp"
+#include "Matrix.hpp"
 
 typedef double (*activationtype)(double);
 
